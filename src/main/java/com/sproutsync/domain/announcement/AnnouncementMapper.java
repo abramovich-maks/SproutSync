@@ -4,7 +4,7 @@ import com.sproutsync.domain.announcement.dto.request.AnnouncementCreateRequestD
 import com.sproutsync.domain.announcement.dto.response.AnnouncementResponseDto;
 import com.sproutsync.domain.announcement.dto.request.AnnouncementUpdateRequestDto;
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.loginandregister.User;
 
 public class AnnouncementMapper {
 

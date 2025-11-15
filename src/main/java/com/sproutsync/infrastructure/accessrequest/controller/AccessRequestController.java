@@ -30,7 +30,7 @@ public class AccessRequestController {
 
     @Operation(summary = "Get requests for parent", description = "Returns all access requests created by a parent")
     @GetMapping("/parent/{id}")
-    public List<AccessResponseDto> getRequestsForParent(@PathVariable Long id) {
+    public List<AccessResponseDto> getRequestsForParent(@PathVariable String id) {
         return accessRequestService.findRequestsByParentId(id).stream()
                 .map(AccessRequestMapper::toDto)
                 .toList();

@@ -9,16 +9,16 @@ public interface AccessRequestService {
 
     AccessRequest createRequest(String email, Long groupId);
 
-    AccessRequest updateRequestStatus(Long id, AccessStatus status);
+    AccessRequest updateRequestStatus(String id, AccessStatus status);
 
-    Optional<AccessRequest> findById(Long id);
+    Optional<AccessRequest> findById(String id);
 
-    List<AccessRequest> findRequestsByParentId(Long parentId);
+    List<AccessRequest> findRequestsByParentId(String parentId);
 
     List<AccessRequest> findRequestsByGroupId(Long groupId);
 
     List<AccessRequest> findAllByStatus(String statusRaw);
 
-    Optional<AccessRequest> findByUserAndGroup(Long userId, Long groupId);
+    Optional<AccessRequest> findByUserAndGroup(String userId, Long groupId);
 
 }

@@ -1,8 +1,8 @@
 package com.sproutsync.domain.accessrequest;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.group.GroupRepository;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.UserService;
 import com.sproutsync.userservice.util.AccessStatus;
 import javax.persistence.EntityNotFoundException;

@@ -2,7 +2,7 @@ package com.sproutsync.domain.accessrequest;
 
 import com.sproutsync.domain.accessrequest.dto.response.AccessResponseDto;
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.userservice.util.AccessStatus;
 
 import java.time.LocalDateTime;

@@ -8,7 +8,7 @@ import lombok.Data;
 public class AccessUpdateRequestDto {
 
     @Schema(description = "ID of the access request", example = "13")
-    private Long id;
+    private String id;
 
     @Schema(
             description = "New access status",

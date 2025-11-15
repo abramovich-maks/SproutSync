@@ -32,6 +32,6 @@ public class ActivityResponseDto {
     private Long groupId;
 
     @Schema(description = "ID of the user who created the activity", example = "5")
-    private Long createdBy;
+    private String createdBy;
 
 }

@@ -1,5 +1,9 @@
 package com.sproutsync.domain.user;
 
+import com.sproutsync.domain.loginandregister.Role;
+import com.sproutsync.domain.loginandregister.RoleRepository;
+import com.sproutsync.domain.loginandregister.User;
+import com.sproutsync.domain.loginandregister.UserRepository;
 import com.sproutsync.domain.user.dto.request.UserUpdateRequestDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(String id) {
         return userRepository.findById(id);
     }
 
@@ -41,9 +45,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-
     @Override
-    public User update(Long id, UserUpdateRequestDto dto) {
+    public User update(String id, UserUpdateRequestDto dto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -72,12 +75,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         userRepository.deleteById(id);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findFirstByEmail(email);
     }
 }

@@ -6,9 +6,9 @@ import com.sproutsync.domain.announcement.dto.request.AnnouncementUpdateRequestD
 import com.sproutsync.domain.announcement.AnnouncementMapper;
 import com.sproutsync.domain.announcement.Announcement;
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.announcement.AnnouncementService;
 import com.sproutsync.domain.group.GroupService;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

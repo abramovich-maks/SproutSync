@@ -3,7 +3,7 @@ package com.sproutsync.domain.activity;
 import com.sproutsync.domain.activity.dto.request.ActivityCreateRequestDto;
 import com.sproutsync.domain.activity.dto.response.ActivityResponseDto;
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.loginandregister.User;
 
 public class ActivityMapper {
 

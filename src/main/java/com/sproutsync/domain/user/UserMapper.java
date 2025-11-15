@@ -1,5 +1,8 @@
 package com.sproutsync.domain.user;
 
+import com.sproutsync.domain.loginandregister.Role;
+import com.sproutsync.domain.loginandregister.RoleRepository;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.dto.request.UserCreateRequestDto;
 import com.sproutsync.domain.user.dto.response.UserResponseDto;
 

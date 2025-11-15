@@ -1,12 +1,11 @@
 package com.sproutsync.domain.accessrequest;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.userservice.util.AccessStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
         @UniqueConstraint(columnNames = {"user_id", "group_id"})
 })
 public class AccessRequest {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

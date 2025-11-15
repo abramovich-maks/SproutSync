@@ -1,5 +1,6 @@
 package com.sproutsync.domain.user;
 
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.dto.request.UserUpdateRequestDto;
 
 import java.util.List;
@@ -9,13 +10,13 @@ public interface UserService {
 
     List<User> findAll();
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(String id);
 
     User create(User user);
 
-    User update(Long id, UserUpdateRequestDto dto);
+    User update(String id, UserUpdateRequestDto dto);
 
-    void delete(Long id);
+    void delete(String id);
 
     Optional<User> findByEmail(String email);
 }

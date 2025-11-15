@@ -1,7 +1,7 @@
 package com.sproutsync.domain.accessrequest;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.userservice.util.AccessStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface AccessRequestRepository extends JpaRepository<AccessRequest, Long> {
+public interface AccessRequestRepository extends JpaRepository<AccessRequest, String> {
 
     List<AccessRequest> findAllByParent(User parent);
 
@@ -17,6 +17,6 @@ public interface AccessRequestRepository extends JpaRepository<AccessRequest, Lo
 
     List<AccessRequest> findAllByAccessStatus(AccessStatus status);
 
-    Optional<AccessRequest> findByParentIdAndGroupId(Long userId, Long groupId);
+    Optional<AccessRequest> findByParentIdAndGroupId(String userId, Long groupId);
 }
 

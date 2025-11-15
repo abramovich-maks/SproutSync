@@ -1,8 +1,10 @@
 package com.sproutsync.domain.photo;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
+
 import javax.persistence.*;
+
+import com.sproutsync.domain.loginandregister.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

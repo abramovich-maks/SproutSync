@@ -1,8 +1,8 @@
 package com.sproutsync.domain.accessrequest;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.group.GroupService;
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.UserService;
 import com.sproutsync.userservice.util.AccessStatus;
 import javax.persistence.EntityNotFoundException;
@@ -46,7 +46,7 @@ public class AccessRequestServiceImpl implements AccessRequestService {
 
     @Override
     @Transactional
-    public AccessRequest updateRequestStatus(Long id, AccessStatus status) {
+    public AccessRequest updateRequestStatus(String id, AccessStatus status) {
         AccessRequest request = accessRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AccessRequest with id " + id + " not found"));
         if (request.getAccessStatus() == status) {
@@ -59,12 +59,12 @@ public class AccessRequestServiceImpl implements AccessRequestService {
 
 
     @Override
-    public Optional<AccessRequest> findById(Long id) {
+    public Optional<AccessRequest> findById(String id) {
         return accessRequestRepository.findById(id);
     }
 
     @Override
-    public List<AccessRequest> findRequestsByParentId(Long parentId) {
+    public List<AccessRequest> findRequestsByParentId(String parentId) {
         User user = userService.findById(parentId)
                 .orElseThrow(() -> new EntityNotFoundException("Parent not found with id: " + parentId));
         return accessRequestRepository.findAllByParent(user);
@@ -97,7 +97,7 @@ public class AccessRequestServiceImpl implements AccessRequestService {
         return requests;
     }
     @Override
-    public Optional<AccessRequest> findByUserAndGroup(Long userId, Long groupId) {
+    public Optional<AccessRequest> findByUserAndGroup(String userId, Long groupId) {
         return accessRequestRepository.findByParentIdAndGroupId(userId, groupId);
     }
 }

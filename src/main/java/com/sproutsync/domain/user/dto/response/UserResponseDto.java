@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserResponseDto {
 
     @Schema(description = "User ID", example = "101")
-    private Long id;
+    private String id;
 
     @Schema(description = "User's first name / username", example = "Jan")
     private String username;

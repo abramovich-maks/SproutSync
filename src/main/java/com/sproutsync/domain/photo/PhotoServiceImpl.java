@@ -1,8 +1,8 @@
 package com.sproutsync.domain.photo;
 
+import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.photo.dto.request.PhotoUploadRequestDto;
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.group.GroupRepository;
 import com.sproutsync.userservice.util.S3Service;
 import com.sproutsync.domain.user.UserService;
