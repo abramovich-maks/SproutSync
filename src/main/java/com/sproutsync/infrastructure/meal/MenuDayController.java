@@ -1,16 +1,16 @@
 package com.sproutsync.infrastructure.meal;
 
-import com.sproutsync.userservice.dto.menuDto.request.MenuDayCreateDto;
-import com.sproutsync.userservice.dto.menuDto.response.MenuDayDto;
-import com.sproutsync.userservice.dto.menuDto.request.MenuDayUpdateDto;
-import com.sproutsync.userservice.mapper.MenuDayMapper;
-import com.sproutsync.userservice.model.Group;
-import com.sproutsync.userservice.model.MenuDay;
-import com.sproutsync.userservice.repository.AllergenRepository;
-import com.sproutsync.userservice.repository.MealTypeRepository;
-import com.sproutsync.userservice.repository.MenuDayRepository;
-import com.sproutsync.userservice.service.GroupService;
-import com.sproutsync.userservice.service.MenuDayService;
+import com.sproutsync.domain.meal.dto.request.MenuDayCreateDto;
+import com.sproutsync.domain.meal.dto.response.MenuDayDto;
+import com.sproutsync.domain.meal.dto.request.MenuDayUpdateDto;
+import com.sproutsync.domain.meal.MenuDayMapper;
+import com.sproutsync.domain.group.Group;
+import com.sproutsync.domain.meal.MenuDay;
+import com.sproutsync.domain.allergen.AllergenRepository;
+import com.sproutsync.domain.meal.MealTypeRepository;
+import com.sproutsync.domain.meal.MenuDayRepository;
+import com.sproutsync.domain.group.GroupService;
+import com.sproutsync.domain.meal.MenuDayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;

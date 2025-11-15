@@ -1,11 +1,11 @@
 package com.sproutsync.infrastructure.group;
 
 
-import com.sproutsync.userservice.dto.groupDto.request.GroupRequestDto;
-import com.sproutsync.userservice.dto.groupDto.response.GroupResponseDto;
-import com.sproutsync.userservice.mapper.GroupMapper;
-import com.sproutsync.userservice.model.Group;
-import com.sproutsync.userservice.service.GroupService;
+import com.sproutsync.domain.group.dto.request.GroupRequestDto;
+import com.sproutsync.domain.group.dto.response.GroupResponseDto;
+import com.sproutsync.domain.group.GroupMapper;
+import com.sproutsync.domain.group.Group;
+import com.sproutsync.domain.group.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;

@@ -2,11 +2,11 @@ package com.sproutsync.infrastructure.photo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sproutsync.userservice.dto.photoDto.response.PhotoResponseDto;
-import com.sproutsync.userservice.dto.photoDto.request.PhotoUploadRequestDto;
-import com.sproutsync.userservice.mapper.PhotoMapper;
-import com.sproutsync.userservice.model.Photo;
-import com.sproutsync.userservice.service.PhotoService;
+import com.sproutsync.domain.photo.dto.response.PhotoResponseDto;
+import com.sproutsync.domain.photo.dto.request.PhotoUploadRequestDto;
+import com.sproutsync.domain.photo.PhotoMapper;
+import com.sproutsync.domain.photo.Photo;
+import com.sproutsync.domain.photo.PhotoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

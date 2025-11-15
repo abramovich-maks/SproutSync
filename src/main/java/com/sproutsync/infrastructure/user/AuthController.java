@@ -1,9 +1,9 @@
 package com.sproutsync.infrastructure.user;
 
-import com.sproutsync.userservice.dto.authDto.request.AuthLoginRequestDto;
-import com.sproutsync.userservice.dto.authDto.request.AuthRegisterRequestDto;
-import com.sproutsync.userservice.dto.authDto.response.AuthResponseDto;
-import com.sproutsync.userservice.service.AuthService;
+import com.sproutsync.domain.user.dto.request.AuthLoginRequestDto;
+import com.sproutsync.domain.user.dto.request.AuthRegisterRequestDto;
+import com.sproutsync.domain.user.dto.response.AuthResponseDto;
+import com.sproutsync.domain.user.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

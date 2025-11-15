@@ -1,6 +1,6 @@
 package com.sproutsync.userservice.config;
 
-import com.sproutsync.userservice.service.MyUserDetailsService;
+import com.sproutsync.domain.user.MyUserDetailsService;
 import com.sproutsync.userservice.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

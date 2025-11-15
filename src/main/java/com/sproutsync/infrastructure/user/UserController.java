@@ -1,16 +1,16 @@
 package com.sproutsync.infrastructure.user;
 
-import com.sproutsync.userservice.dto.userDto.request.UserCreateRequestDto;
-import com.sproutsync.userservice.dto.userDto.response.UserResponseDto;
-import com.sproutsync.userservice.dto.userDto.request.UserUpdateRequestDto;
-import com.sproutsync.userservice.model.User;
-import com.sproutsync.userservice.repository.RoleRepository;
-import com.sproutsync.userservice.service.UserService;
+import com.sproutsync.domain.user.dto.request.UserCreateRequestDto;
+import com.sproutsync.domain.user.dto.response.UserResponseDto;
+import com.sproutsync.domain.user.dto.request.UserUpdateRequestDto;
+import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.user.RoleRepository;
+import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import com.sproutsync.userservice.mapper.UserMapper;
+import com.sproutsync.domain.user.UserMapper;
 
 import java.util.List;
 

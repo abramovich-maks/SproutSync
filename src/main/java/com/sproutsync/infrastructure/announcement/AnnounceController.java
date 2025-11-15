@@ -1,15 +1,15 @@
 package com.sproutsync.infrastructure.announcement;
 
-import com.sproutsync.userservice.dto.announcementDto.request.AnnouncementCreateRequestDto;
-import com.sproutsync.userservice.dto.announcementDto.response.AnnouncementResponseDto;
-import com.sproutsync.userservice.dto.announcementDto.request.AnnouncementUpdateRequestDto;
-import com.sproutsync.userservice.mapper.AnnouncementMapper;
-import com.sproutsync.userservice.model.Announcement;
-import com.sproutsync.userservice.model.Group;
-import com.sproutsync.userservice.model.User;
-import com.sproutsync.userservice.service.AnnouncementService;
-import com.sproutsync.userservice.service.GroupService;
-import com.sproutsync.userservice.service.UserService;
+import com.sproutsync.domain.announcement.dto.request.AnnouncementCreateRequestDto;
+import com.sproutsync.domain.announcement.dto.response.AnnouncementResponseDto;
+import com.sproutsync.domain.announcement.dto.request.AnnouncementUpdateRequestDto;
+import com.sproutsync.domain.announcement.AnnouncementMapper;
+import com.sproutsync.domain.announcement.Announcement;
+import com.sproutsync.domain.group.Group;
+import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.announcement.AnnouncementService;
+import com.sproutsync.domain.group.GroupService;
+import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;

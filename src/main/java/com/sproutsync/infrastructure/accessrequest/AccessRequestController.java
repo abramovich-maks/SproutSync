@@ -1,11 +1,11 @@
 package com.sproutsync.infrastructure.accessrequest;
 
-import com.sproutsync.userservice.dto.accessRequestDto.request.AccessCreateRequestDto;
-import com.sproutsync.userservice.dto.accessRequestDto.request.AccessUpdateRequestDto;
-import com.sproutsync.userservice.dto.accessRequestDto.response.AccessResponseDto;
-import com.sproutsync.userservice.mapper.AccessRequestMapper;
-import com.sproutsync.userservice.model.AccessRequest;
-import com.sproutsync.userservice.service.AccessRequestService;
+import com.sproutsync.domain.accessrequest.dto.request.AccessCreateRequestDto;
+import com.sproutsync.domain.accessrequest.dto.request.AccessUpdateRequestDto;
+import com.sproutsync.domain.accessrequest.dto.response.AccessResponseDto;
+import com.sproutsync.domain.accessrequest.AccessRequestMapper;
+import com.sproutsync.domain.accessrequest.AccessRequest;
+import com.sproutsync.domain.accessrequest.AccessRequestService;
 import com.sproutsync.userservice.util.AccessStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

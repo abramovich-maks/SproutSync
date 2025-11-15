@@ -1,0 +1,35 @@
+package com.sproutsync.domain.photo;
+
+import com.sproutsync.domain.photo.dto.response.PhotoResponseDto;
+import com.sproutsync.domain.photo.dto.request.PhotoUploadRequestDto;
+import com.sproutsync.domain.group.Group;
+import com.sproutsync.domain.user.User;
+
+
+public class PhotoMapper {
+
+    public static PhotoResponseDto toDto(Photo entity) {
+        PhotoResponseDto dto = new PhotoResponseDto();
+        dto.setId(entity.getId());
+        dto.setGroupId(entity.getGroup().getId());
+        dto.setUrl(entity.getUrl());
+        dto.setDescription(entity.getDescription());
+        dto.setCreatedAt(entity.getCreatedAt());
+        dto.setUpdatedAt(entity.getUpdatedAt());
+        dto.setCreatedById(entity.getCreatedBy().getId());
+
+        return dto;
+    }
+
+    public static Photo toEntity(PhotoUploadRequestDto dto, Group group, User user) {
+        return new Photo(
+                null,
+                group,
+                null,
+                dto.getDescription(),
+                null,
+                null,
+                user
+        );
+    }
+}

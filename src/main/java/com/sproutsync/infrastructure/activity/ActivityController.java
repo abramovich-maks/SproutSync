@@ -1,15 +1,15 @@
 package com.sproutsync.infrastructure.activity;
 
-import com.sproutsync.userservice.dto.activityDto.request.ActivityCreateRequestDto;
-import com.sproutsync.userservice.dto.activityDto.response.ActivityResponseDto;
-import com.sproutsync.userservice.dto.activityDto.request.ActivityUpdateRequestDto;
-import com.sproutsync.userservice.mapper.ActivityMapper;
-import com.sproutsync.userservice.model.Activity;
-import com.sproutsync.userservice.model.Group;
-import com.sproutsync.userservice.model.User;
-import com.sproutsync.userservice.service.ActivityService;
-import com.sproutsync.userservice.service.GroupService;
-import com.sproutsync.userservice.service.UserService;
+import com.sproutsync.domain.activity.dto.request.ActivityCreateRequestDto;
+import com.sproutsync.domain.activity.dto.response.ActivityResponseDto;
+import com.sproutsync.domain.activity.dto.request.ActivityUpdateRequestDto;
+import com.sproutsync.domain.activity.ActivityMapper;
+import com.sproutsync.domain.activity.Activity;
+import com.sproutsync.domain.group.Group;
+import com.sproutsync.domain.user.User;
+import com.sproutsync.domain.activity.ActivityService;
+import com.sproutsync.domain.group.GroupService;
+import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
