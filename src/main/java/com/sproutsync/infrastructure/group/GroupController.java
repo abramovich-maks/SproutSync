@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.group;
 
 
 import com.sproutsync.userservice.dto.groupDto.request.GroupRequestDto;

@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.user;
 
 import com.sproutsync.userservice.dto.authDto.request.AuthLoginRequestDto;
 import com.sproutsync.userservice.dto.authDto.request.AuthRegisterRequestDto;

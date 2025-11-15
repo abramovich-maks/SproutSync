@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.accessrequest;
 
 import com.sproutsync.userservice.dto.accessRequestDto.request.AccessCreateRequestDto;
 import com.sproutsync.userservice.dto.accessRequestDto.request.AccessUpdateRequestDto;

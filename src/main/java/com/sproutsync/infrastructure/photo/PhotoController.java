@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.photo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

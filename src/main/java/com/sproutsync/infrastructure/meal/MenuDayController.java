@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.meal;
 
 import com.sproutsync.userservice.dto.menuDto.request.MenuDayCreateDto;
 import com.sproutsync.userservice.dto.menuDto.response.MenuDayDto;

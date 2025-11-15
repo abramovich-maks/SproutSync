@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.announcement;
 
 import com.sproutsync.userservice.dto.announcementDto.request.AnnouncementCreateRequestDto;
 import com.sproutsync.userservice.dto.announcementDto.response.AnnouncementResponseDto;

@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.user;
 
 import com.sproutsync.userservice.dto.userDto.request.UserCreateRequestDto;
 import com.sproutsync.userservice.dto.userDto.response.UserResponseDto;

@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.controller;
+package com.sproutsync.infrastructure.activity;
 
 import com.sproutsync.userservice.dto.activityDto.request.ActivityCreateRequestDto;
 import com.sproutsync.userservice.dto.activityDto.response.ActivityResponseDto;
