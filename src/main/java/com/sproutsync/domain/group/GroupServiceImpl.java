@@ -1,6 +1,6 @@
 package com.sproutsync.domain.group;
 
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

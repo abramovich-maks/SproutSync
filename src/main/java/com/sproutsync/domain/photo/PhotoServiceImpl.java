@@ -6,7 +6,7 @@ import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.group.GroupRepository;
 import com.sproutsync.userservice.util.S3Service;
 import com.sproutsync.domain.user.UserService;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

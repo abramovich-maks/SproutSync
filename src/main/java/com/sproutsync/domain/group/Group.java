@@ -1,7 +1,7 @@
 package com.sproutsync.domain.group;
 
 import com.sproutsync.domain.accessrequest.AccessRequest;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

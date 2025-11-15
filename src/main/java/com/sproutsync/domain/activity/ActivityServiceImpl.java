@@ -3,7 +3,7 @@ package com.sproutsync.domain.activity;
 import com.sproutsync.domain.activity.dto.request.ActivityUpdateRequestDto;
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.group.GroupRepository;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

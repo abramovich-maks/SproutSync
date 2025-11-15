@@ -2,7 +2,7 @@ package com.sproutsync.domain.meal;
 
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.allergen.Allergen;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

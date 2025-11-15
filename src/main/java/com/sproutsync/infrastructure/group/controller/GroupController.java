@@ -1,4 +1,4 @@
-package com.sproutsync.infrastructure.group;
+package com.sproutsync.infrastructure.group.controller;
 
 
 import com.sproutsync.domain.group.dto.request.GroupRequestDto;
@@ -8,8 +8,8 @@ import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.group.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

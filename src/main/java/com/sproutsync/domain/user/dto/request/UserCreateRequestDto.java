@@ -1,7 +1,7 @@
 package com.sproutsync.domain.user.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import javax.validation.constraints.*;
 import lombok.Data;
 
 @Data

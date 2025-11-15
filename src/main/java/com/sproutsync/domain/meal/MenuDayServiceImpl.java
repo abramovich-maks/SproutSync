@@ -6,7 +6,7 @@ import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.group.GroupRepository;
 import com.sproutsync.domain.meal.dto.response.MealDto;
 import com.sproutsync.domain.meal.dto.request.MenuDayUpdateDto;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

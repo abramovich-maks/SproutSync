@@ -2,7 +2,7 @@ package com.sproutsync.domain.announcement;
 
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.user.User;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

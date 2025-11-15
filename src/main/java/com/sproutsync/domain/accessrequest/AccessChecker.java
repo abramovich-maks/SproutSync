@@ -5,7 +5,7 @@ import com.sproutsync.domain.user.User;
 import com.sproutsync.domain.group.GroupRepository;
 import com.sproutsync.domain.user.UserService;
 import com.sproutsync.userservice.util.AccessStatus;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

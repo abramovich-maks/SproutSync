@@ -1,4 +1,4 @@
-package com.sproutsync.infrastructure.accessrequest;
+package com.sproutsync.infrastructure.accessrequest.controller;
 
 import com.sproutsync.domain.accessrequest.dto.request.AccessCreateRequestDto;
 import com.sproutsync.domain.accessrequest.dto.request.AccessUpdateRequestDto;

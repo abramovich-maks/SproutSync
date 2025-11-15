@@ -1,4 +1,4 @@
-package com.sproutsync.domain.user;
+package com.sproutsync.domain.loginandregister;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

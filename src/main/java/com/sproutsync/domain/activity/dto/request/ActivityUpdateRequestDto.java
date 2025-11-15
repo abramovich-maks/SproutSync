@@ -2,7 +2,7 @@ package com.sproutsync.domain.activity.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Future;
+import javax.validation.constraints.Future;
 import lombok.Data;
 
 import java.time.LocalDateTime;

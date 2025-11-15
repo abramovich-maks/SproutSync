@@ -1,4 +1,4 @@
-package com.sproutsync.infrastructure.meal;
+package com.sproutsync.infrastructure.meal.controller;
 
 import com.sproutsync.domain.meal.dto.request.MenuDayCreateDto;
 import com.sproutsync.domain.meal.dto.response.MenuDayDto;
@@ -13,8 +13,8 @@ import com.sproutsync.domain.group.GroupService;
 import com.sproutsync.domain.meal.MenuDayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

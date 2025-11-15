@@ -1,6 +1,6 @@
-package com.sproutsync.domain.user;
+package com.sproutsync.domain.loginandregister;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

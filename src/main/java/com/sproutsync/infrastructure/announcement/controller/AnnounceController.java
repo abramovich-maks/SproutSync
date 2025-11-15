@@ -1,4 +1,4 @@
-package com.sproutsync.infrastructure.announcement;
+package com.sproutsync.infrastructure.announcement.controller;
 
 import com.sproutsync.domain.announcement.dto.request.AnnouncementCreateRequestDto;
 import com.sproutsync.domain.announcement.dto.response.AnnouncementResponseDto;
@@ -12,8 +12,8 @@ import com.sproutsync.domain.group.GroupService;
 import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
