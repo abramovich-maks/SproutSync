@@ -23,11 +23,6 @@ import java.time.ZoneOffset;
 @AllArgsConstructor
 public class JwtAuthenticator {
 
-    @Bean
-    Clock clock() {
-        return Clock.systemUTC();
-    }
-
     private final AuthenticationManager authenticationManager;
     private final Clock clock;
     private final JwtConfigurationProperties properties;

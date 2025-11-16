@@ -21,7 +21,7 @@
         <mockito-core.version>4.9.0</mockito-core.version>
         <wiremock-jre8.version>2.35.0</wiremock-jre8.version>
         <awaitility.version>4.3.0</awaitility.version>
-        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+        <springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
         <java-jwt.version>4.0.0</java-jwt.version>
         <spring-data-redis.version>2.4.5</spring-data-redis.version>
         <jedis.version>3.3.0</jedis.version>
@@ -107,10 +107,11 @@
         </dependency>
         <!--  SWAGGER http://localhost:8080/swagger-ui/index.html#/ -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${springfox-boot-starter.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.8.0</version>
         </dependency>
+
         <!-- JWT -->
         <dependency>
             <groupId>com.auth0</groupId>

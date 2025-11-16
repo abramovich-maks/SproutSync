@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.config;
+package com.sproutsync.infrastructure;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

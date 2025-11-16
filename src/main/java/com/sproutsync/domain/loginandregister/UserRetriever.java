@@ -27,7 +27,7 @@ class UserRetriever {
     }
 
     List<UserDto> findAllUsers() {
-        List<User> allUsers = userRepository.findAllByUsername();
+        List<User> allUsers = userRepository.findAll();
         return allUsers.stream()
                 .map(user -> UserDto.builder()
                         .userId(user.getId())

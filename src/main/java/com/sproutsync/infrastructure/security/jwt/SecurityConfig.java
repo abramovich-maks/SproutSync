@@ -33,15 +33,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable();
-        httpSecurity.authorizeRequests()
-                .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/v3/api-docs").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/token/**").permitAll()
-                .antMatchers("/register/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/api/auth/register", "/api/auth/login").permitAll()
+        httpSecurity.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/webjars/**").permitAll()
+                .antMatchers("/token/**", "/register/**", "/api/auth/register", "/api/auth/login").permitAll()
 
                 .antMatchers(HttpMethod.POST, "/api/access-requests").hasRole("PARENT")
                 .antMatchers(HttpMethod.POST, "/upload").hasRole("ADMIN")
