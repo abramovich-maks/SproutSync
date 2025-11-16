@@ -97,7 +97,7 @@ public class AccessRequestServiceImpl implements AccessRequestService {
         return requests;
     }
     @Override
-    public Optional<AccessRequest> findByUserAndGroup(String userId, Long groupId) {
+    public Optional<AccessRequest> findByUserAndGroup(Long userId, Long groupId) {
         return accessRequestRepository.findByParentIdAndGroupId(userId, groupId);
     }
 }

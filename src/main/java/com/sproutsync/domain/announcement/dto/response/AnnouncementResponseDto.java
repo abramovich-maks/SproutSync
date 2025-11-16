@@ -32,5 +32,5 @@ public class AnnouncementResponseDto {
     private LocalDateTime updatedAt;
 
     @Schema(description = "ID of the user who created the announcement", example = "3")
-    private String createdByUserId;
+    private Long createdByUserId;
 }

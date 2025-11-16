@@ -17,6 +17,6 @@ public interface AccessRequestRepository extends JpaRepository<AccessRequest, St
 
     List<AccessRequest> findAllByAccessStatus(AccessStatus status);
 
-    Optional<AccessRequest> findByParentIdAndGroupId(String userId, Long groupId);
+    Optional<AccessRequest> findByParentIdAndGroupId(Long userId, Long groupId);
 }
 

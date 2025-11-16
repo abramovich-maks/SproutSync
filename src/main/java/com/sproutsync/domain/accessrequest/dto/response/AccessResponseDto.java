@@ -12,7 +12,7 @@ public class AccessResponseDto {
     private Long id;
 
     @Schema(description = "ID of the user who made the request", example = "5")
-    private String userId;
+    private Long userId;
 
     @Schema(description = "First name of the requesting user", example = "Jan")
     private String userName;

@@ -19,6 +19,6 @@ public interface AccessRequestService {
 
     List<AccessRequest> findAllByStatus(String statusRaw);
 
-    Optional<AccessRequest> findByUserAndGroup(String userId, Long groupId);
+    Optional<AccessRequest> findByUserAndGroup(Long userId, Long groupId);
 
 }

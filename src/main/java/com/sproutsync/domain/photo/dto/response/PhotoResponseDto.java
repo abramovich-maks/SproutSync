@@ -28,6 +28,6 @@ public class PhotoResponseDto {
     private LocalDateTime updatedAt;
 
     @Schema(description = "ID of the user who uploaded the photo", example = "3")
-    private String createdById;
+    private Long createdById;
 
 }
