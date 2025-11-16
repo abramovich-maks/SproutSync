@@ -23,6 +23,8 @@ public class UserMapper {
                 dto.getSurname(),
                 dto.getEmail(),
                 dto.getPassword(),
+                null,
+                false,
                 roles
         );
     }
@@ -37,7 +39,7 @@ public class UserMapper {
         dto.setEmail(user.getEmail());
 
         Set<String> roleNames = new HashSet<>();
-        for (Role role : user.getRoles()) {
+        for (Role role : user.getAuthorities()) {
             roleNames.add(role.getName());
         }
         dto.setRoles(roleNames);

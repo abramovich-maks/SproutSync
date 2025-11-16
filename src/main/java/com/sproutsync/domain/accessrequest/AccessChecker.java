@@ -28,7 +28,7 @@ public class AccessChecker {
                 .orElseThrow(() -> new EntityNotFoundException("Group with id: " + groupId + " not found"));
         User user = userService.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with email: " + email));
-        boolean isAdmin = user.getRoles().stream()
+        boolean isAdmin = user.getAuthorities().stream()
                 .anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
         if (isAdmin) {
             return true;

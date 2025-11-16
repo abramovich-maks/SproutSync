@@ -5,25 +5,37 @@ import com.sproutsync.domain.loginandregister.dto.RegisterUserResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @Log4j2
 class UserAdder {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     RegisterUserResponseDto register(final RegisterUserRequestDto user) {
         if (userExists(user.email())) {
             log.warn("User with email: {} already exists", user.email());
             throw new UserAlreadyExistException(user.email());
         }
+        Role defaultRole = roleRepository.findByName("ROLE_PARENT")
+                .orElseThrow(() -> new RuntimeException("Default role ROLE_PARENT not found"));
+
+        Set<Role> roles = Set.of(defaultRole);
         User createdUser = User.builder()
+                .username(user.username())
+                .surname(user.surname())
                 .email(user.email())
                 .password(user.password())
+                .authorities(roles)
                 .build();
         User savedUser = userRepository.save(createdUser);
         log.info("Saved user with id: {}", savedUser.getId());
         return RegisterUserResponseDto
                 .builder()
+                .username(createdUser.getUsername())
+                .surname(createdUser.getSurname())
                 .email(createdUser.getEmail())
                 .message("Success. User created.")
                 .build();

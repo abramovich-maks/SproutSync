@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 class LoginAndRegisterConfiguration {
 
     @Bean
-    public static LoginAndRegisterFacade loginAndRegisterFacade(UserRepository userRepository) {
+    public static LoginAndRegisterFacade loginAndRegisterFacade(UserRepository userRepository, RoleRepository roleRepository) {
         UserRetriever userRetriever = new UserRetriever(userRepository);
-        UserAdder userAdder = new UserAdder(userRepository);
+        UserAdder userAdder = new UserAdder(userRepository, roleRepository);
         return new LoginAndRegisterFacade(userRetriever, userAdder);
     }
 }

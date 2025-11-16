@@ -12,6 +12,14 @@ import static com.sproutsync.infrastructure.apivalidation.ValidationConstants.PA
 
 @Builder
 public record RegisterUserRequestDto(
+        @NotNull(message = "{username.not.null}")
+        @NotEmpty(message = "{username.not.empty}")
+        String username,
+
+        @NotNull(message = "{surname.not.null}")
+        @NotEmpty(message = "{surname.not.empty}")
+        String surname,
+
         @NotNull(message = "{email.not.null}")
         @NotEmpty(message = "{email.not.empty}")
         @Email(message = "{register.email}")

@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+        if (user.getAuthorities() == null || user.getAuthorities().isEmpty()) {
             Role defaultRole = roleRepository.findByName("ROLE_PARENT")
                     .orElseThrow(() -> new RuntimeException("Default role ROLE_PARENT not found"));
-            user.setRoles(Set.of(defaultRole));
+            user.setAuthorities(Set.of(defaultRole));
         }
         return userRepository.save(user);
     }
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new RuntimeException("Role not found"));
                 roles.add(role);
             }
-            user.setRoles(roles);
+            user.setAuthorities(roles);
         }
         return userRepository.save(user);
     }

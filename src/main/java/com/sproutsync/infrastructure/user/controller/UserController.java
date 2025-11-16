@@ -1,10 +1,10 @@
 package com.sproutsync.infrastructure.user.controller;
 
+import com.sproutsync.domain.loginandregister.RoleRepository;
 import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.user.dto.request.UserCreateRequestDto;
 import com.sproutsync.domain.user.dto.response.UserResponseDto;
 import com.sproutsync.domain.user.dto.request.UserUpdateRequestDto;
-import com.sproutsync.domain.loginandregister.RoleRepository;
 import com.sproutsync.domain.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
