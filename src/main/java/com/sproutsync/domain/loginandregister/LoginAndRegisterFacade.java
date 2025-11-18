@@ -6,8 +6,6 @@ import com.sproutsync.domain.loginandregister.dto.RegisterUserResponseDto;
 import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 public class LoginAndRegisterFacade {
 
@@ -18,12 +16,7 @@ public class LoginAndRegisterFacade {
         return userRetriever.findByEmail(email);
     }
 
-    public List<UserDto> findAllUsers() {
-        return userRetriever.findAllUsers();
-    }
-
     public RegisterUserResponseDto register(final RegisterUserRequestDto user) {
         return userAdder.register(user);
     }
-
 }

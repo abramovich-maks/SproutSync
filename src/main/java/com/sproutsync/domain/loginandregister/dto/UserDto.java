@@ -5,6 +5,8 @@ import lombok.Builder;
 @Builder
 public record UserDto(
         Long userId,
+        String username,
+        String surname,
         String mail,
         String password
 ) {

@@ -4,11 +4,11 @@ import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.BadCredentialsException;
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Log4j2
+@Service
 class UserRetriever {
 
     private final UserRepository userRepository;
@@ -26,14 +26,19 @@ class UserRetriever {
                 .build();
     }
 
-    List<UserDto> findAllUsers() {
-        List<User> allUsers = userRepository.findAll();
-        return allUsers.stream()
-                .map(user -> UserDto.builder()
-                        .userId(user.getId())
-                        .mail(user.getEmail())
-                        .password(user.getPassword())
-                        .build())
-                .toList();
+    public UserDto findById(Long id) {
+        User retrievedUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return UserDto.builder()
+                .userId(retrievedUser.getId())
+                .username(retrievedUser.getUsername())
+                .surname(retrievedUser.getSurname())
+                .mail(retrievedUser.getEmail())
+                .build();
+    }
+
+    public boolean userExists(final String userEmail) {
+        return userRepository.existsByEmail(userEmail);
     }
 }

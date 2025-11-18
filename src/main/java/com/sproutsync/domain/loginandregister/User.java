@@ -1,6 +1,7 @@
 package com.sproutsync.domain.loginandregister;
 
-import com.sproutsync.domain.util.util.BaseEntity;
+import com.sproutsync.domain.role.Role;
+import com.sproutsync.domain.util.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
