@@ -1,11 +1,11 @@
-package com.sproutsync.domain.loginandregister;
+package com.sproutsync.domain.role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(String name);
 
 }
