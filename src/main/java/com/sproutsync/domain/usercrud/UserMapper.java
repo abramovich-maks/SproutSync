@@ -1,7 +1,8 @@
 package com.sproutsync.domain.usercrud;
 
-import com.sproutsync.domain.loginandregister.Role;
 import com.sproutsync.domain.loginandregister.User;
+import com.sproutsync.domain.role.Role;
+import com.sproutsync.domain.role.dto.RoleResponseDto;
 import com.sproutsync.domain.usercrud.dto.response.UserResponseDto;
 
 import java.util.Set;
@@ -18,5 +19,11 @@ class UserMapper {
                 .email(user.getEmail())
                 .roles(userRoles)
                 .build();
+    }
+
+    public static Set<Role> mapFromRoleResponseDtoToRole(final Set<RoleResponseDto> roleResponseDtos) {
+        return roleResponseDtos.stream()
+                .map(role -> new Role(role.roleId(), role.role()))
+                .collect(Collectors.toSet());
     }
 }

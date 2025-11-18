@@ -1,8 +1,9 @@
 package com.sproutsync.domain.usercrud;
 
-import com.sproutsync.domain.loginandregister.Role;
-import com.sproutsync.domain.loginandregister.RoleRepository;
 import com.sproutsync.domain.loginandregister.User;
+import com.sproutsync.domain.role.Role;
+import com.sproutsync.domain.role.RoleFacade;
+import com.sproutsync.domain.role.dto.RoleResponseDto;
 import com.sproutsync.domain.usercrud.dto.request.UserUpdateRequestDto;
 import com.sproutsync.domain.usercrud.dto.response.UserUpdateResponseDto;
 import lombok.AllArgsConstructor;
@@ -12,13 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.sproutsync.domain.usercrud.UserMapper.mapFromRoleResponseDtoToRole;
+
 @Service
 @AllArgsConstructor
 class UserUpdater {
 
     private final UserCrudRepository userCrudRepository;
     private final UserCrudRetriever userCrudRetriever;
-    private final RoleRepository roleRepository;
+    private final RoleFacade roleFacade;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -45,13 +48,13 @@ class UserUpdater {
         if (dto.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
         }
-        //TODO use roleFacade
+
         if (dto.getRoleIds() != null) {
-            Set<Role> roles = dto.getRoleIds().stream()
-                    .map(roleId -> roleRepository.findById(roleId)
-                            .orElseThrow(() -> new RuntimeException("role not found")))
+            Set<RoleResponseDto> collectRoleId = dto.getRoleIds().stream()
+                    .map(roleFacade::findRoleById)
                     .collect(Collectors.toSet());
-            user.setAuthorities(roles);
+            Set<Role> collect = mapFromRoleResponseDtoToRole(collectRoleId);
+            user.setAuthorities(collect);
             responseBuilder.roleIds(dto.getRoleIds());
         }
         userCrudRepository.save(user);

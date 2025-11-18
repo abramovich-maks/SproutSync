@@ -1,10 +1,11 @@
 package com.sproutsync.domain.usercrud;
 
-import com.sproutsync.domain.loginandregister.Role;
-import com.sproutsync.domain.loginandregister.RoleRepository;
 import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.loginandregister.UserAlreadyExistException;
 import com.sproutsync.domain.loginandregister.dto.RegisterUserResponseDto;
+import com.sproutsync.domain.role.Role;
+import com.sproutsync.domain.role.RoleFacade;
+import com.sproutsync.domain.role.dto.RoleResponseDto;
 import com.sproutsync.domain.usercrud.dto.request.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+
+import static com.sproutsync.domain.usercrud.UserMapper.mapFromRoleResponseDtoToRole;
+import static java.util.stream.Collectors.toSet;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +25,7 @@ class UserAdder {
     private final PasswordEncoder passwordEncoder;
     private final UserCrudRetriever userCrudRetriever;
     private final UserCrudRepository userCrudRepository;
-    private final RoleRepository roleRepository;
+    private final RoleFacade roleFacade;
 
     public RegisterUserResponseDto addUser(CreateUserRequestDto user) {
         if (userCrudRetriever.userExists(user.email())) {
@@ -32,11 +36,10 @@ class UserAdder {
         if (roleIds == null || roleIds.isEmpty()) {
             roleIds = Set.of(3L);
         }
-        //todo replace roleRepo -> roleFacade
-        Set<Role> roles = roleIds.stream()
-                .map(roleId -> roleRepository.findById(roleId)
-                        .orElseThrow(() -> new IllegalArgumentException("Role not found, id=" + roleId)))
-                .collect(java.util.stream.Collectors.toSet());
+        Set<RoleResponseDto> rolesDtos = roleIds.stream()
+                .map(roleFacade::findRoleById)
+                .collect(toSet());
+        Set<Role> roles = mapFromRoleResponseDtoToRole(rolesDtos);
 
         User createdUser = User.builder()
                 .username(user.username())
