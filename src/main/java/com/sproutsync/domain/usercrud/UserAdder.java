@@ -10,14 +10,12 @@ import com.sproutsync.domain.usercrud.dto.request.CreateUserRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 import static com.sproutsync.domain.usercrud.UserMapper.mapFromRoleResponseDtoToRole;
 import static java.util.stream.Collectors.toSet;
 
-@Service
 @AllArgsConstructor
 @Log4j2
 class UserAdder {

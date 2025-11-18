@@ -7,7 +7,6 @@ import com.sproutsync.domain.role.RoleFacade;
 import com.sproutsync.domain.role.dto.RoleResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -15,7 +14,6 @@ import static com.sproutsync.domain.loginandregister.LoginAndRegisterMapper.mapF
 
 @AllArgsConstructor
 @Log4j2
-@Service
 class UserAdder {
 
     private final UserRepository userRepository;

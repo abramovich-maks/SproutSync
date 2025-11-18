@@ -2,9 +2,7 @@ package com.sproutsync.domain.role;
 
 import com.sproutsync.domain.role.dto.RoleResponseDto;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
 @AllArgsConstructor
 class RoleRetriever {
 

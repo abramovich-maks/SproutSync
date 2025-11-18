@@ -1,5 +1,6 @@
 package com.sproutsync.domain.loginandregister;
 
+import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.role.Role;
 import com.sproutsync.domain.util.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -16,11 +17,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -59,6 +63,9 @@ public class User extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+
+    private List<Group> group;
+
     private Collection<Role> authorities = new HashSet<>();
 
     public boolean confirm() {

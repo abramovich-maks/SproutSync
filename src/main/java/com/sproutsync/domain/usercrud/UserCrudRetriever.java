@@ -5,13 +5,11 @@ import com.sproutsync.domain.usercrud.dto.response.UserListResponseDto;
 import com.sproutsync.domain.usercrud.dto.response.UserResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.sproutsync.domain.usercrud.UserMapper.mapFromUserToUserResponseDto;
 
-@Service
 @AllArgsConstructor
 @Log4j2
 class UserCrudRetriever {

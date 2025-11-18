@@ -7,9 +7,7 @@ import com.sproutsync.domain.usercrud.dto.response.UserListResponseDto;
 import com.sproutsync.domain.usercrud.dto.response.UserResponseDto;
 import com.sproutsync.domain.usercrud.dto.response.UserUpdateResponseDto;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
 @AllArgsConstructor
 public class UserCrudFacade {
 

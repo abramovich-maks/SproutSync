@@ -8,14 +8,12 @@ import com.sproutsync.domain.usercrud.dto.request.UserUpdateRequestDto;
 import com.sproutsync.domain.usercrud.dto.response.UserUpdateResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.sproutsync.domain.usercrud.UserMapper.mapFromRoleResponseDtoToRole;
 
-@Service
 @AllArgsConstructor
 class UserUpdater {
 

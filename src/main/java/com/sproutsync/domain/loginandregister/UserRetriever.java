@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Log4j2
-@Service
 class UserRetriever {
 
     private final UserRepository userRepository;
