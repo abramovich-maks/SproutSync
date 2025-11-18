@@ -1,4 +1,4 @@
-package com.sproutsync.domain.user.dto.request;
+package com.sproutsync.domain.usercrud.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.*;
