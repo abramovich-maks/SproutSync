@@ -40,6 +40,7 @@ class UserAdder {
         log.info("Saved user with id: {}", savedUser.getId());
         return RegisterUserResponseDto
                 .builder()
+                .userId(createdUser.getId())
                 .username(createdUser.getUsername())
                 .surname(createdUser.getSurname())
                 .email(createdUser.getEmail())

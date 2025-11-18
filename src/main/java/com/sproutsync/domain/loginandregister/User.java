@@ -24,6 +24,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.sproutsync.infrastructure.apivalidation.ValidationConstants.PASSWORD_MAX_SIZE;
+import static com.sproutsync.infrastructure.apivalidation.ValidationConstants.PASSWORD_MIN_SIZE;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,7 +51,7 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String email;
 
-    @Size(min = 8, max = 100)
+    @Size(min = PASSWORD_MIN_SIZE, max = PASSWORD_MAX_SIZE, message = "{password.size}")
     private String password;
 
     private String confirmationToken;
