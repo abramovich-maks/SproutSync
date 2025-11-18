@@ -17,14 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -57,16 +55,21 @@ public class User extends BaseEntity {
 
     private boolean enabled = false;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "users_groups",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
+    private List<Group> group;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-
-    private List<Group> group;
-
-    private Collection<Role> authorities = new HashSet<>();
+    private Set<Role> authorities = new HashSet<>();
 
     public boolean confirm() {
         this.setEnabled(true);
@@ -74,7 +77,7 @@ public class User extends BaseEntity {
         return true;
     }
 
-    public User(final String email, final String password, String confirmationToken, final Collection<Role> authorities) {
+    public User(final String email, final String password, String confirmationToken, final Set<Role> authorities) {
         this.email = email;
         this.password = password;
         this.confirmationToken = confirmationToken;
