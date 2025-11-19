@@ -1,12 +1,16 @@
-package com.sproutsync.domain.group.dto.request;
+package com.sproutsync.domain.group.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-@Schema(name = "GroupRequest", description = "Request payload for creating or updating a group")
-public class GroupRequestDto {
+import javax.validation.constraints.NotBlank;
+
+@Builder
+@Schema(name = "GroupResponse", description = "Response DTO representing a group")
+public class GroupCreateResponseDto {
+
+    @Schema(description = "Unique ID of the group", example = "12")
+    private Long id;
 
     @NotBlank
     @Schema(description = "Name of the group", example = "Biedronki")
@@ -16,7 +20,4 @@ public class GroupRequestDto {
     @Schema(description = "Short description of the group", example = "This is the preschool group for 3-4 year olds")
     private String description;
 
-    @NotBlank
-    @Schema(description = "URL of the main photo representing the group", example = "https://example.com/groups/biedronki.jpg")
-    private String mainFoto;
 }
