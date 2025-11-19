@@ -1,18 +1,29 @@
 package com.sproutsync.domain.group;
 
-import com.sproutsync.domain.accessrequest.AccessRequest;
-import javax.persistence.*;
+import com.sproutsync.domain.loginandregister.User;
+import com.sproutsync.domain.util.BaseEntity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
-@Data
+@Getter(AccessLevel.PACKAGE)
+@Setter(AccessLevel.PACKAGE)
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "child_group")
-public class Group {
+@Builder
+public class Group extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +31,7 @@ public class Group {
 
     private String name;
     private String description;
-    private String mainFoto;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AccessRequest> accessRequests;
+    @ManyToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<User> users;
 }
