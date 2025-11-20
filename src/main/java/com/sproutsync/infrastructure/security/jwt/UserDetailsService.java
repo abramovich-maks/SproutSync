@@ -4,11 +4,13 @@ import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
 import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 class UserDetailsService implements UserDetailsManager {
@@ -50,7 +52,9 @@ class UserDetailsService implements UserDetailsManager {
         return new User(
                 user.mail(),
                 user.password(),
-                Collections.emptyList()
+                user.roles().stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getName()))
+                        .collect(Collectors.toList())
         );
     }
 }
