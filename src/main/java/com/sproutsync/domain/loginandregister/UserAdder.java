@@ -7,6 +7,7 @@ import com.sproutsync.domain.role.RoleFacade;
 import com.sproutsync.domain.role.dto.RoleResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 
@@ -19,6 +20,7 @@ class UserAdder {
     private final UserRepository userRepository;
     private final UserRetriever userRetriever;
     private final RoleFacade roleFacade;
+    private final PasswordEncoder passwordEncoder;
 
     RegisterUserResponseDto register(final RegisterUserRequestDto user) {
         if (userRetriever.userExists(user.email())) {
@@ -28,12 +30,13 @@ class UserAdder {
         RoleResponseDto defaultRole = roleFacade.findRoleByName("ROLE_PARENT");
         Role role = mapFromRoleResponseDtoToRole(defaultRole);
         Set<Role> roles = Set.of(role);
+        String encodedPassword = passwordEncoder.encode(user.password());
 
         User createdUser = User.builder()
                 .username(user.username())
                 .surname(user.surname())
                 .email(user.email())
-                .password(user.password())
+                .password(encodedPassword)
                 .authorities(roles)
                 .build();
         User savedUser = userRepository.save(createdUser);

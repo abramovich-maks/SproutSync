@@ -4,7 +4,6 @@ import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Log4j2
@@ -22,6 +21,7 @@ class UserRetriever {
                 .userId(userByEmail.getId())
                 .mail(userByEmail.getEmail())
                 .password(userByEmail.getPassword())
+                .roles(userByEmail.getAuthorities())
                 .build();
     }
 

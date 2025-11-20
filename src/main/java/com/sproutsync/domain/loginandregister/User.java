@@ -51,7 +51,6 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String email;
 
-    @Size(min = PASSWORD_MIN_SIZE, max = PASSWORD_MAX_SIZE, message = "{password.size}")
     private String password;
 
     private String confirmationToken;
