@@ -1,7 +1,6 @@
 package com.sproutsync.domain.meal;
 
 import com.sproutsync.domain.group.Group;
-import com.sproutsync.domain.allergen.Allergen;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "menu_day")
-public class MenuDay {
+class MenuDay {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

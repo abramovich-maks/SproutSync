@@ -9,4 +9,6 @@ public class AllergenCreateDto {
 
     @Schema(description = "Allergen ID", example = "3")
     private Long id;
+
+    private String allergen;
 }

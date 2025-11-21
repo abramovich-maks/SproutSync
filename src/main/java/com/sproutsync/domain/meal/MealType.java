@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "meal_type", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
-public class MealType {
+class MealType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

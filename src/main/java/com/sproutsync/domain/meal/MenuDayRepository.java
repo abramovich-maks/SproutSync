@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface MenuDayRepository extends JpaRepository<MenuDay, Long> {
+interface MenuDayRepository extends JpaRepository<MenuDay, Long> {
 
     Optional<MenuDay> findByGroupIdAndId(Long group_id, Long id);
 
