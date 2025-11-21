@@ -13,7 +13,9 @@ class MenyDayConfiguration {
                                               AllergenRepository allergenRepository,
                                               MealTypeRepository mealTypeRepository
     ) {
-        MenuDayAdder menuDayAdder = new MenuDayAdder(groupFacade,menuDayRepository,allergenRepository,mealTypeRepository);
+        AllergenRetriever allergenRetriever = new AllergenRetriever(allergenRepository);
+        MealTypeRetriever mealTypeRetriever = new MealTypeRetriever(mealTypeRepository);
+        MenuDayAdder menuDayAdder = new MenuDayAdder(groupFacade, allergenRetriever, mealTypeRetriever, menuDayRepository);
         return new MenuDayFacade(menuDayAdder);
     }
 }

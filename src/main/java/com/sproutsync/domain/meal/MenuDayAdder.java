@@ -9,19 +9,22 @@ import com.sproutsync.domain.meal.dto.response.MealDto;
 import com.sproutsync.domain.meal.dto.response.MenuDayCreateDtoResponse;
 import lombok.AllArgsConstructor;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.sproutsync.domain.meal.MealMapper.mapAllergensToAllergenDto;
+import static com.sproutsync.domain.meal.MealMapper.mapFromMealToMealDto;
 
 @AllArgsConstructor
 class MenuDayAdder {
 
     private final GroupFacade groupFacade;
+    private final AllergenRetriever allergenRetriever;
+    private final MealTypeRetriever mealTypeRetriever;
     private final MenuDayRepository menuDayRepository;
-    private final AllergenRepository allergenRepository;
-    private final MealTypeRepository mealTypeRepository;
 
     public MenuDayCreateDtoResponse createMenuDay(Long groupId, MenuDayCreateDtoRequest menuDayRequest) {
         GroupResponseDto groupById = groupFacade.getGroupById(groupId);
@@ -33,53 +36,42 @@ class MenuDayAdder {
         if (allergenIds == null) {
             allergenIds = new HashSet<>();
         }
-        Set<Allergen> allergens = new HashSet<>(allergenRepository.findAllById(allergenIds));
-
-        if (allergens.size() != allergenIds.size()) {
-            throw new EntityNotFoundException("Some allergens were not found");
-        }
+        Set<Allergen> allergens = allergenRetriever.getAllergensByIds(allergenIds);
 
         MenuDay menuDayEntity = new MenuDay();
         menuDayEntity.setDate(menuDayRequest.date());
         menuDayEntity.setGroup(group);
         menuDayEntity.setAllergens(allergens);
 
-        List<Meal> meals = menuDayRequest.meals().stream()
-                .map(dto -> {
-                    Meal meal = new Meal();
-                    meal.setDescription(dto.description());
-                    MealType type = mealTypeRepository.findByName(dto.mealType())
-                            .orElseThrow(() -> new RuntimeException("asdf"));
-                    meal.setMealType(type);
-                    meal.setMenuDay(menuDayEntity);
-                    return meal;
-                })
-                .collect(Collectors.toList());
+        List<Meal> meals = createMeals(menuDayRequest.meals(), menuDayEntity);
 
         menuDayEntity.setMeals(meals);
 
         MenuDay savedMenuDay = menuDayRepository.save(menuDayEntity);
 
-        List<MealDto> savedMealsDto = savedMenuDay.getMeals().stream()
-                .map(m -> new MealDto(
-                        m.getMealType().getName(),
-                        m.getDescription()
-                ))
-                .toList();
+        List<MealDto> savedMealsDto = mapFromMealToMealDto(savedMenuDay);
 
-        Set<AllergenCreateDto> savedAllergensDto = savedMenuDay.getAllergens().stream()
-                .map(a -> {
-                    AllergenCreateDto dto = new AllergenCreateDto();
-                    dto.setId(a.getId());
-                    dto.setAllergen(a.getName());
-                    return dto;
-                })
-                .collect(Collectors.toSet());
+        Set<AllergenCreateDto> savedAllergensDto = mapAllergensToAllergenDto(savedMenuDay);
 
         return MenuDayCreateDtoResponse.builder()
                 .date(savedMenuDay.getDate())
                 .meals(savedMealsDto)
                 .allergens(savedAllergensDto)
                 .build();
+    }
+
+    private List<Meal> createMeals(List<MealDto> mealDtos, MenuDay menuDayEntity) {
+        Set<String> mealTypeNames = mealDtos.stream()
+                .map(MealDto::mealType)
+                .collect(Collectors.toSet());
+
+        Map<String, MealType> mealTypesMap = mealTypeRetriever.getMealTypesMapByNames(mealTypeNames);
+
+        return mealDtos.stream()
+                .map(dto -> {
+                    MealType type = mealTypesMap.get(dto.mealType());
+                    return MealMapper.mapFromMealDtoToMeal(dto, menuDayEntity, type);
+                })
+                .collect(Collectors.toList());
     }
 }
