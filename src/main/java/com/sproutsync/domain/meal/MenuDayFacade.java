@@ -4,6 +4,7 @@ import com.sproutsync.domain.meal.dto.request.MenuDayCreateDtoRequest;
 import com.sproutsync.domain.meal.dto.request.MenuDayUpdateDto;
 import com.sproutsync.domain.meal.dto.response.MenuDayCreateDtoResponse;
 import com.sproutsync.domain.meal.dto.response.MenuDayResponseDto;
+import com.sproutsync.domain.meal.dto.response.MenuDayUpdateResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

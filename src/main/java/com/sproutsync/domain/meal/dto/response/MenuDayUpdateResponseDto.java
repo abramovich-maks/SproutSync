@@ -1,7 +1,6 @@
-package com.sproutsync.domain.meal;
+package com.sproutsync.domain.meal.dto.response;
 
 import com.sproutsync.domain.meal.dto.request.AllergenCreateDto;
-import com.sproutsync.domain.meal.dto.response.MealDto;
 import lombok.Builder;
 
 import java.time.LocalDate;

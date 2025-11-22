@@ -5,6 +5,7 @@ import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import com.sproutsync.domain.meal.dto.request.AllergenCreateDto;
 import com.sproutsync.domain.meal.dto.request.MenuDayUpdateDto;
 import com.sproutsync.domain.meal.dto.response.MealDto;
+import com.sproutsync.domain.meal.dto.response.MenuDayUpdateResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
