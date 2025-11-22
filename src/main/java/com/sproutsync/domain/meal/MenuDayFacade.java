@@ -1,20 +1,24 @@
 package com.sproutsync.domain.meal;
 
 import com.sproutsync.domain.meal.dto.request.MenuDayCreateDtoRequest;
-
 import com.sproutsync.domain.meal.dto.response.MenuDayCreateDtoResponse;
+import com.sproutsync.domain.meal.dto.response.MenuDayResponseDto;
 import lombok.AllArgsConstructor;
+
+import java.time.LocalDate;
 
 
 @AllArgsConstructor
 public class MenuDayFacade {
 
     private final MenuDayAdder menuDayAdder;
+    private final MenuRetriever menuRetriever;
 
     public MenuDayCreateDtoResponse createMenuDay(Long groupId, MenuDayCreateDtoRequest menuDayRequest) {
         return menuDayAdder.createMenuDay(groupId, menuDayRequest);
     }
-//    public MenuDay updateMenuDay(Long groupId, Long menuId, MenuDayUpdateDto menuDayDto) {
+
+    //    public MenuDay updateMenuDay(Long groupId, Long menuId, MenuDayUpdateDto menuDayDto) {
 //        Group group = groupRepository.findById(groupId)
 //                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
 //        MenuDay updateMenu = menuDayRepository.findByGroupIdAndId(group.getId(), menuId)
@@ -72,10 +76,7 @@ public class MenuDayFacade {
 //        return menuDayRepository.getAllByGroupId(groupId);
 //    }
 //
-//    public MenuDay getMenuDayByData(Long groupId, LocalDate date) {
-//        Group group = groupRepository.findById(groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
-//        return menuDayRepository.findByGroupIdAndDate(groupId,date)
-//                .orElseThrow(() -> new EntityNotFoundException("Menu for date " + date + " not found for group with id " + groupId));
-//    }
+    public MenuDayResponseDto findMenuByData(Long groupId, LocalDate date) {
+        return menuRetriever.findMenuForTheDay(groupId,date);
+    }
 }
