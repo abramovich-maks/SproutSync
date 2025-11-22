@@ -4,16 +4,19 @@ import com.sproutsync.domain.meal.dto.request.MenuDayCreateDtoRequest;
 import com.sproutsync.domain.meal.dto.response.MenuDayCreateDtoResponse;
 import com.sproutsync.domain.meal.dto.response.MenuDayResponseDto;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 @AllArgsConstructor
+@Transactional
 public class MenuDayFacade {
 
     private final MenuDayAdder menuDayAdder;
     private final MenuRetriever menuRetriever;
+    private final MenuDeleter menuDeleter;
 
     public MenuDayCreateDtoResponse createMenuDay(Long groupId, MenuDayCreateDtoRequest menuDayRequest) {
         return menuDayAdder.createMenuDay(groupId, menuDayRequest);
@@ -56,23 +59,12 @@ public class MenuDayFacade {
 //        return menuDayRepository.save(updateMenu);
 //    }
 //
-//    public void deleteMenuDay(Long groupId, Long menuId) {
-//        Group group = groupRepository.findById(groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
-//        MenuDay menuDay = menuDayRepository.findByGroupIdAndId(group.getId(), menuId)
-//                .orElseThrow(() -> new EntityNotFoundException("Menu with id " + menuId + " not found"));
-//        menuDay.getAllergens().clear();
-//        menuDayRepository.save(menuDay);
-//        menuDayRepository.delete(menuDay);
-//    }
-//
-//
-//    public List<MenuDay> getAllMenuByGroupId(Long groupId) {
-//        return menuDayRepository.getAllByGroupId(groupId);
-//    }
-//
+    public void deleteMenuDay(Long groupId, LocalDate date) {
+        menuDeleter.f(groupId, date);
+    }
+
     public MenuDayResponseDto findMenuByData(Long groupId, LocalDate date) {
-        return menuRetriever.findMenuForTheDay(groupId,date);
+        return menuRetriever.findMenuForTheDay(groupId, date);
     }
 
     public List<MenuDayResponseDto> getAllMenuByGroupId(final Long groupId) {
