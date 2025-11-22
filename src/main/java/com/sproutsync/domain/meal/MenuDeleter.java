@@ -11,7 +11,7 @@ class MenuDeleter {
 
     private final MenuDayRepository menuDayRepository;
 
-    public void f(Long groupId, LocalDate date) {
+    public void deleteMenuDay(Long groupId, LocalDate date) {
         menuDayRepository.findByGroupIdAndDate(groupId, date)
                 .ifPresentOrElse(menuDayRepository::delete, () -> {
                     throw new MenuDayNotFoundException(date);

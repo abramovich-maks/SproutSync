@@ -18,6 +18,7 @@ class MenyDayConfiguration {
         MenuDayAdder menuDayAdder = new MenuDayAdder(groupFacade, allergenRetriever, mealTypeRetriever, menuDayRepository);
         MenuRetriever menuRetriever = new MenuRetriever(menuDayRepository, groupFacade);
         MenuDeleter menuDeleter = new MenuDeleter(menuDayRepository);
-        return new MenuDayFacade(menuDayAdder, menuRetriever, menuDeleter);
+        MenuUpdater menuUpdater = new MenuUpdater(allergenRetriever, mealTypeRetriever, menuRetriever, groupFacade);
+        return new MenuDayFacade(menuDayAdder, menuRetriever, menuDeleter, menuUpdater);
     }
 }

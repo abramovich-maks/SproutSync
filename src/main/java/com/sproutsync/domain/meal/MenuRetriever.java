@@ -43,6 +43,12 @@ class MenuRetriever {
                 .build();
     }
 
+    public MenuDay findEntityMenuForTheDay(Long groupId, LocalDate date) {
+        GroupResponseDto groupById = groupFacade.getGroupById(groupId);
+        return menuDayRepository.findByGroupIdAndDate(groupById.groupId(), date)
+                .orElseThrow(() -> new MenuDayNotFoundException(date));
+    }
+
     public List<MenuDayResponseDto> findAllMenuByGroup(Long groupId) {
         GroupResponseDto groupById = groupFacade.getGroupById(groupId);
         List<MenuDay> allByGroupId = menuDayRepository.findAllByGroupId((groupById.groupId()));
@@ -65,6 +71,11 @@ class MenuRetriever {
                             .build();
                 })
                 .collect(Collectors.toList());
+    }
+
+    public boolean existsMenuForTheDay(Long groupId, LocalDate date) {
+        GroupResponseDto groupById = groupFacade.getGroupById(groupId);
+        return menuDayRepository.findByGroupIdAndDate(groupById.groupId(), date).isPresent();
     }
 
     private static GroupResponseDto buildGroupResponseDto(final GroupResponseDto groupById) {

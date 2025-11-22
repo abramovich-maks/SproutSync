@@ -29,7 +29,7 @@ class MenuDay {
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
     private Group group;
 
-    @OneToMany(mappedBy = "menuDay",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "menuDay", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Meal> meals;
 
     @ManyToMany(fetch = FetchType.LAZY)
