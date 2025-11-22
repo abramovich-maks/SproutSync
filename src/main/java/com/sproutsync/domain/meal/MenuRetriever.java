@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.sproutsync.domain.meal.MealMapper.mapFromAllergenToAllergenDto;
 import static com.sproutsync.domain.meal.MealMapper.mapFromMealToMealDto;
@@ -40,6 +41,30 @@ class MenuRetriever {
                 .updatedAt(menu.getUpdatedAt())
                 .createdAt(menu.getCreatedAt())
                 .build();
+    }
+
+    public List<MenuDayResponseDto> findAllMenuByGroup(Long groupId) {
+        GroupResponseDto groupById = groupFacade.getGroupById(groupId);
+        List<MenuDay> allByGroupId = menuDayRepository.findAllByGroupId((groupById.groupId()));
+
+        GroupResponseDto groupInfo = buildGroupResponseDto(groupById);
+
+        return allByGroupId.stream()
+                .map(menu -> {
+                    List<MealDto> mealDtos = mapFromMealToMealDto(menu.getMeals());
+                    Set<AllergenDto> allergenDtos = mapFromAllergenToAllergenDto(menu.getAllergens());
+
+                    return MenuDayResponseDto.builder()
+                            .id(menu.getId())
+                            .date(menu.getDate())
+                            .group(groupInfo)
+                            .meals(mealDtos)
+                            .allergens(allergenDtos)
+                            .updatedAt(menu.getUpdatedAt())
+                            .createdAt(menu.getCreatedAt())
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 
     private static GroupResponseDto buildGroupResponseDto(final GroupResponseDto groupById) {

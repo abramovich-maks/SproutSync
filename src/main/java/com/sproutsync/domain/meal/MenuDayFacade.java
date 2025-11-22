@@ -6,6 +6,7 @@ import com.sproutsync.domain.meal.dto.response.MenuDayResponseDto;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -65,12 +66,6 @@ public class MenuDayFacade {
 //        menuDayRepository.delete(menuDay);
 //    }
 //
-//    public MenuDay getMenuDayByGroupId(Long groupId, Long menuId) {
-//        Group group = groupRepository.findById(groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
-//        return menuDayRepository.findByGroupIdAndId(group.getId(), menuId)
-//                .orElseThrow(() -> new EntityNotFoundException("Menu with id " + menuId + " not found"));
-//    }
 //
 //    public List<MenuDay> getAllMenuByGroupId(Long groupId) {
 //        return menuDayRepository.getAllByGroupId(groupId);
@@ -78,5 +73,9 @@ public class MenuDayFacade {
 //
     public MenuDayResponseDto findMenuByData(Long groupId, LocalDate date) {
         return menuRetriever.findMenuForTheDay(groupId,date);
+    }
+
+    public List<MenuDayResponseDto> getAllMenuByGroupId(final Long groupId) {
+        return menuRetriever.findAllMenuByGroup(groupId);
     }
 }
