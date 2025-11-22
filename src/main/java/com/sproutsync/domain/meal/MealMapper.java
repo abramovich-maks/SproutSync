@@ -1,6 +1,7 @@
 package com.sproutsync.domain.meal;
 
 import com.sproutsync.domain.meal.dto.request.AllergenCreateDto;
+import com.sproutsync.domain.meal.dto.response.AllergenDto;
 import com.sproutsync.domain.meal.dto.response.MealDto;
 
 import java.util.List;
@@ -35,5 +36,23 @@ class MealMapper {
         meal.setMealType(mealType);
         meal.setMenuDay(menuDay);
         return meal;
+    }
+
+    public static List<MealDto> mapFromMealToMealDto(List<Meal> meals) {
+        return meals.stream()
+                .map(meal -> MealDto.builder()
+                        .mealType(meal.getMealType().getName())
+                        .description(meal.getDescription())
+                        .build())
+                .toList();
+    }
+
+    public static Set<AllergenDto> mapFromAllergenToAllergenDto(Set<Allergen> allergens) {
+        return allergens.stream()
+                .map(allergen -> AllergenDto.builder()
+                        .id(allergen.getId())
+                        .name(allergen.getName())
+                        .build())
+                .collect(Collectors.toSet());
     }
 }
