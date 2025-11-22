@@ -36,4 +36,8 @@ public class Group extends BaseEntity {
 
     @ManyToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<User> users;
+
+    public Group(final Long groupId) {
+        this.id = groupId;
+    }
 }
