@@ -1,13 +1,17 @@
 package com.sproutsync.domain.loginandregister.dto;
 
+import com.sproutsync.domain.role.Role;
 import lombok.Builder;
 
+import java.util.Set;
 
 @Builder
-public record UserDto(
+public record UserSecurityDto(
         Long userId,
         String username,
         String surname,
-        String mail
+        String mail,
+        String password,
+        Set<Role> roles
 ) {
 }

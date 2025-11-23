@@ -85,4 +85,11 @@ public class User extends BaseEntity {
         this.confirmationToken = confirmationToken;
         this.authorities = authorities;
     }
+
+    public User(final Long userId, final String username, String surname, final String email) {
+        this.id = userId;
+        this.username =username;
+        this.surname = surname;
+        this.email = email;
+    }
 }
