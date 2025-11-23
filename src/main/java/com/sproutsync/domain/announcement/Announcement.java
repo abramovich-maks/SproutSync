@@ -1,22 +1,31 @@
 package com.sproutsync.domain.announcement;
 
 import com.sproutsync.domain.group.Group;
-
-import javax.persistence.*;
-
 import com.sproutsync.domain.loginandregister.User;
+import com.sproutsync.domain.util.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Announcement {
+class Announcement extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
