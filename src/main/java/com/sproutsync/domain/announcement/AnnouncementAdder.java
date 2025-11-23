@@ -19,7 +19,13 @@ class AnnouncementAdder {
 
     public AnnouncementCreateResponseDto createAnnouncement(Long groupId, AnnouncementCreateRequestDto requestDto) {
         User user = loginAndRegisterFacade.getUserPrincipal();
-        UserDto currentUserDto = loginAndRegisterFacade.findUserDtoByEmail(user.getEmail());
+
+        UserDto currentUserDto = UserDto.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .surname(user.getSurname())
+                .mail(user.getEmail())
+                .build();
 
         GroupResponseDto groupById = groupFacade.getGroupById(groupId);
         Group group = new Group(groupById.groupId());
