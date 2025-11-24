@@ -5,6 +5,8 @@ import com.sproutsync.domain.announcement.dto.response.AnnouncementCreateRespons
 import com.sproutsync.domain.announcement.dto.response.AnnouncementRetrieveResponseDto;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class AnnouncementFacade {
 
@@ -43,8 +45,8 @@ public class AnnouncementFacade {
     public AnnouncementRetrieveResponseDto getAnnouncementByGroup(Long groupId, Long announcementId) {
         return announcementRetriever.getAnnouncementByGroup(groupId, announcementId);
     }
-//    @Override
-//    public List<Announcement> getAllAnnouncementsByGroupId(Long groupId) {
-//        return announcementRepository.findAllByGroupId(groupId);
-//    }
+
+    public List<AnnouncementRetrieveResponseDto> getAllAnnouncementsByGroupId(Long groupId) {
+        return announcementRetriever.getAnnouncementsByGroup(groupId);
+    }
 }

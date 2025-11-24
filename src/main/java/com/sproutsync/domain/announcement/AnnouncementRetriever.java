@@ -3,9 +3,13 @@ package com.sproutsync.domain.announcement;
 import com.sproutsync.domain.announcement.dto.response.AnnouncementRetrieveResponseDto;
 import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
-import com.sproutsync.domain.loginandregister.User;
-import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
+import static com.sproutsync.domain.announcement.AnnouncementMapper.getGroupDto;
+import static com.sproutsync.domain.announcement.AnnouncementMapper.mapFromAnnouncementToAnnouncementRetrieveDto;
 
 @AllArgsConstructor
 class AnnouncementRetriever {
@@ -16,31 +20,18 @@ class AnnouncementRetriever {
     AnnouncementRetrieveResponseDto getAnnouncementByGroup(final Long groupId, final Long announcementId) {
         GroupResponseDto group = groupFacade.getGroupById(groupId);
         Announcement announcement = announcementRepository.findByGroupIdAndId(group.groupId(), announcementId)
-                .orElseThrow(() -> new IllegalArgumentException("Announcement " + announcementId + " not found in group " + groupId));
+                .orElseThrow(() -> new EntityNotFoundException("Announcement " + announcementId + " not found in group " + groupId));
+        return mapFromAnnouncementToAnnouncementRetrieveDto(announcement, getGroupDto(group));
+    }
 
-        GroupResponseDto groupDto = GroupResponseDto.builder()
-                .groupId(group.groupId())
-                .groupName(group.groupName())
-                .description(group.description())
-                .build();
+    List<AnnouncementRetrieveResponseDto> getAnnouncementsByGroup(final Long groupId) {
+        GroupResponseDto group = groupFacade.getGroupById(groupId);
+        GroupResponseDto groupDto = getGroupDto(group);
 
-        User creator = announcement.getCreatedBy();
-        UserDto creatorDto = UserDto.builder()
-                .userId(creator.getId())
-                .username(creator.getUsername())
-                .surname(creator.getSurname())
-                .mail(creator.getEmail())
-                .build();
+        List<Announcement> allByGroupId = announcementRepository.findAllByGroupId(group.groupId());
 
-        return AnnouncementRetrieveResponseDto.builder()
-                .id(announcement.getId())
-                .group(groupDto)
-                .title(announcement.getTitle())
-                .message(announcement.getMessage())
-                .photo(announcement.getPhoto())
-                .createdAt(announcement.getCreatedAt())
-                .updatedAt(announcement.getUpdatedAt())
-                .createdBy(creatorDto)
-                .build();
+        return allByGroupId.stream()
+                .map(announcement -> mapFromAnnouncementToAnnouncementRetrieveDto(announcement, groupDto))
+                .toList();
     }
 }

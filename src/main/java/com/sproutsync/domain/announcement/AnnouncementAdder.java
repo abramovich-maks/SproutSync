@@ -7,8 +7,10 @@ import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
 import com.sproutsync.domain.loginandregister.User;
-import com.sproutsync.domain.loginandregister.dto.UserDto;
 import lombok.AllArgsConstructor;
+
+import static com.sproutsync.domain.announcement.AnnouncementMapper.fromAnnouncementToAnnouncementCreateDto;
+import static com.sproutsync.domain.announcement.AnnouncementMapper.getGroupDto;
 
 
 @AllArgsConstructor
@@ -21,13 +23,6 @@ class AnnouncementAdder {
     public AnnouncementCreateResponseDto createAnnouncement(Long groupId, AnnouncementCreateRequestDto requestDto) {
         User user = loginAndRegisterFacade.getUserPrincipal();
 
-        UserDto currentUserDto = UserDto.builder()
-                .userId(user.getId())
-                .username(user.getUsername())
-                .surname(user.getSurname())
-                .mail(user.getEmail())
-                .build();
-
         GroupResponseDto groupById = groupFacade.getGroupById(groupId);
         Group group = new Group(groupById.groupId());
         Announcement announcement = new Announcement();
@@ -38,21 +33,8 @@ class AnnouncementAdder {
         announcement.setCreatedBy(user);
         Announcement savedAnnouncement = announcementRepository.save(announcement);
 
-        GroupResponseDto groupInfo = GroupResponseDto.builder()
-                .groupId(groupById.groupId())
-                .groupName(groupById.groupName())
-                .description(groupById.description())
-                .build();
+        GroupResponseDto groupInfo = getGroupDto(groupById);
 
-        return AnnouncementCreateResponseDto.builder()
-                .id(savedAnnouncement.getId())
-                .group(groupInfo)
-                .title(savedAnnouncement.getTitle())
-                .message(savedAnnouncement.getMessage())
-                .photo(savedAnnouncement.getPhoto())
-                .createdAt(savedAnnouncement.getCreatedAt())
-                .createdBy(currentUserDto)
-                .build();
-
+        return fromAnnouncementToAnnouncementCreateDto(savedAnnouncement, groupInfo);
     }
 }

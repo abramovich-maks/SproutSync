@@ -10,6 +10,6 @@ interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
 
     List<Announcement> findAllByGroupId(Long groupId);
 
-    @Query("select a from Announcement a join fetch a.createdBy where a.group.id = :groupId AND a.id = :id")
+    @Query("SELECT a FROM Announcement a JOIN FETCH a.createdBy WHERE a.group.id = :groupId AND a.id = :id")
     Optional<Announcement> findByGroupIdAndId(Long groupId, Long id);
 }
