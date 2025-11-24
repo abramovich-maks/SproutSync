@@ -1,17 +1,19 @@
 package com.sproutsync.domain.announcement;
 
 import com.sproutsync.domain.announcement.dto.request.AnnouncementCreateRequestDto;
+import com.sproutsync.domain.announcement.dto.response.AnnouncementCreateResponseDto;
+import com.sproutsync.domain.announcement.dto.response.AnnouncementRetrieveResponseDto;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class AnnouncementFacade {
 
     private final AnnouncementAdder announcementAdder;
+    private final AnnouncementRetriever announcementRetriever;
 
     public AnnouncementCreateResponseDto createAnnouncement(Long groupId, AnnouncementCreateRequestDto requestDto) {
         return announcementAdder.createAnnouncement(groupId, requestDto);
     }
-//
 //    @Override
 //    public Announcement updateAnnouncement(Long groupId, Long announcementId, AnnouncementUpdateRequestDto updateDto) {
 //        Group group = groupRepository.findById(groupId)
@@ -38,14 +40,9 @@ public class AnnouncementFacade {
 //                .orElseThrow(() -> new EntityNotFoundException("Announcement with id:" + announcementId + " not found"));
 //        announcementRepository.deleteById(existing.getId());
 //    }
-//
-//    @Override
-//    public Announcement getAnnouncementByGroup(Long groupId, Long announcementId) {
-//        return announcementRepository.findByGroupIdAndId(groupId, announcementId)
-//                .orElseThrow(() -> new EntityNotFoundException("Announcement with id: " + announcementId + " not found"));
-//    }
-//
-//
+    public AnnouncementRetrieveResponseDto getAnnouncementByGroup(Long groupId, Long announcementId) {
+        return announcementRetriever.getAnnouncementByGroup(groupId, announcementId);
+    }
 //    @Override
 //    public List<Announcement> getAllAnnouncementsByGroupId(Long groupId) {
 //        return announcementRepository.findAllByGroupId(groupId);

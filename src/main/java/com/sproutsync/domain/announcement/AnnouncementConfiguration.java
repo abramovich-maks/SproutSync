@@ -13,6 +13,7 @@ class AnnouncementConfiguration {
                                           GroupFacade groupFacade,
                                           LoginAndRegisterFacade loginAndRegisterFacade) {
         AnnouncementAdder announcementAdder = new AnnouncementAdder(announcementRepository, groupFacade, loginAndRegisterFacade);
-        return new AnnouncementFacade(announcementAdder);
+        AnnouncementRetriever announcementRetriever = new AnnouncementRetriever(announcementRepository, groupFacade);
+        return new AnnouncementFacade(announcementAdder, announcementRetriever);
     }
 }

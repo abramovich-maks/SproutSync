@@ -1,4 +1,4 @@
-package com.sproutsync.domain.announcement;
+package com.sproutsync.domain.announcement.dto.response;
 
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import com.sproutsync.domain.loginandregister.dto.UserDto;

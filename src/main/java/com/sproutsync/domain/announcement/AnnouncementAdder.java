@@ -1,6 +1,7 @@
 package com.sproutsync.domain.announcement;
 
 import com.sproutsync.domain.announcement.dto.request.AnnouncementCreateRequestDto;
+import com.sproutsync.domain.announcement.dto.response.AnnouncementCreateResponseDto;
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
