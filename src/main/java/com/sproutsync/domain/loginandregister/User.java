@@ -5,8 +5,9 @@ import com.sproutsync.domain.role.Role;
 import com.sproutsync.domain.util.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,10 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.sproutsync.infrastructure.apivalidation.ValidationConstants.PASSWORD_MAX_SIZE;
-import static com.sproutsync.infrastructure.apivalidation.ValidationConstants.PASSWORD_MIN_SIZE;
-
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -65,7 +64,7 @@ public class User extends BaseEntity {
     )
     private List<Group> group;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -88,7 +87,7 @@ public class User extends BaseEntity {
 
     public User(final Long userId, final String username, String surname, final String email) {
         this.id = userId;
-        this.username =username;
+        this.username = username;
         this.surname = surname;
         this.email = email;
     }

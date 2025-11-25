@@ -2,11 +2,15 @@ package com.sproutsync.domain.loginandregister;
 
 import com.sproutsync.domain.loginandregister.dto.UserDto;
 import com.sproutsync.domain.loginandregister.dto.UserSecurityDto;
+import com.sproutsync.domain.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Log4j2
@@ -20,11 +24,17 @@ class UserRetriever {
                     log.warn("User with email: {} not found", email);
                     return new BadCredentialsException(email);
                 });
+
+        Set<String> roleNames = userByEmail.getAuthorities()
+                .stream()
+                .map(Role::getName)
+                .collect(Collectors.toSet());
+
         return UserSecurityDto.builder()
                 .userId(userByEmail.getId())
                 .mail(userByEmail.getEmail())
                 .password(userByEmail.getPassword())
-                .roles(userByEmail.getAuthorities())
+                .roles(roleNames)
                 .build();
     }
 

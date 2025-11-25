@@ -12,6 +12,6 @@ public record UserSecurityDto(
         String surname,
         String mail,
         String password,
-        Set<Role> roles
+        Set<String> roles
 ) {
 }
