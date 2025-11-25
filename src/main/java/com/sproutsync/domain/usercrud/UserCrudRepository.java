@@ -21,7 +21,9 @@ interface UserCrudRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-    @Override
     @EntityGraph(attributePaths = "authorities")
     List<User> findAll();
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.authorities  WHERE u.id = :id")
+    Optional<User> findById(Long id);
 }
