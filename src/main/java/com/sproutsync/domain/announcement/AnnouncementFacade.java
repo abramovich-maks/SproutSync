@@ -12,11 +12,13 @@ public class AnnouncementFacade {
 
     private final AnnouncementAdder announcementAdder;
     private final AnnouncementRetriever announcementRetriever;
+    private final AnnouncementDeleter announcementDeleter;
 
     public AnnouncementCreateResponseDto createAnnouncement(Long groupId, AnnouncementCreateRequestDto requestDto) {
         return announcementAdder.createAnnouncement(groupId, requestDto);
     }
-//    @Override
+
+    //    @Override
 //    public Announcement updateAnnouncement(Long groupId, Long announcementId, AnnouncementUpdateRequestDto updateDto) {
 //        Group group = groupRepository.findById(groupId)
 //                .orElseThrow(() -> new EntityNotFoundException("Group with id:" + groupId + " not found"));
@@ -34,14 +36,10 @@ public class AnnouncementFacade {
 //        return announcementRepository.save(updateAnnouncement);
 //    }
 //
-//    @Override
-//    public void deleteAnnouncement(Long groupId,Long announcementId) {
-//        Group group = groupRepository.findById(groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Group with id:" + groupId + " not found"));
-//        Announcement existing = announcementRepository.findByGroupIdAndId(group.getId(), announcementId)
-//                .orElseThrow(() -> new EntityNotFoundException("Announcement with id:" + announcementId + " not found"));
-//        announcementRepository.deleteById(existing.getId());
-//    }
+    public void deleteAnnouncement(Long groupId, Long announcementId) {
+        announcementDeleter.deleteById(groupId, announcementId);
+    }
+
     public AnnouncementRetrieveResponseDto getAnnouncementByGroup(Long groupId, Long announcementId) {
         return announcementRetriever.getAnnouncementByGroup(groupId, announcementId);
     }

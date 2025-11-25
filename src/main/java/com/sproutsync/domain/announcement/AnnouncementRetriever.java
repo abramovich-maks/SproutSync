@@ -5,7 +5,6 @@ import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import lombok.AllArgsConstructor;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.sproutsync.domain.announcement.AnnouncementMapper.getGroupDto;
@@ -20,7 +19,7 @@ class AnnouncementRetriever {
     AnnouncementRetrieveResponseDto getAnnouncementByGroup(final Long groupId, final Long announcementId) {
         GroupResponseDto group = groupFacade.getGroupById(groupId);
         Announcement announcement = announcementRepository.findByGroupIdAndId(group.groupId(), announcementId)
-                .orElseThrow(() -> new EntityNotFoundException("Announcement " + announcementId + " not found in group " + groupId));
+                .orElseThrow(() -> new AnnouncementNotFoundException(announcementId));
         return mapFromAnnouncementToAnnouncementRetrieveDto(announcement, getGroupDto(group));
     }
 

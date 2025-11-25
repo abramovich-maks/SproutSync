@@ -14,6 +14,7 @@ class AnnouncementConfiguration {
                                           LoginAndRegisterFacade loginAndRegisterFacade) {
         AnnouncementAdder announcementAdder = new AnnouncementAdder(announcementRepository, groupFacade, loginAndRegisterFacade);
         AnnouncementRetriever announcementRetriever = new AnnouncementRetriever(announcementRepository, groupFacade);
-        return new AnnouncementFacade(announcementAdder, announcementRetriever);
+        AnnouncementDeleter announcementDeleter = new AnnouncementDeleter(announcementRepository, groupFacade);
+        return new AnnouncementFacade(announcementAdder, announcementRetriever, announcementDeleter);
     }
 }
