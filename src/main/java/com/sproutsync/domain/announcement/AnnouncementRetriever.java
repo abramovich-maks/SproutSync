@@ -33,4 +33,9 @@ class AnnouncementRetriever {
                 .map(announcement -> mapFromAnnouncementToAnnouncementRetrieveDto(announcement, groupDto))
                 .toList();
     }
+    Announcement getAnnouncementEntityByGroup(final Long groupId, final Long announcementId) {
+        GroupResponseDto group = groupFacade.getGroupById(groupId);
+        return announcementRepository.findByGroupIdAndId(group.groupId(), announcementId)
+                .orElseThrow(() -> new AnnouncementNotFoundException(announcementId));
+    }
 }
