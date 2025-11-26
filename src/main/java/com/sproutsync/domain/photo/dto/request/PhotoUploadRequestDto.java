@@ -1,13 +1,16 @@
 package com.sproutsync.domain.photo.dto.request;
 
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-@Data
+import java.util.Set;
+
 @Schema(name = "PhotoUploadRequest", description = "Request payload for uploading a photo")
-public class PhotoUploadRequestDto {
+public record PhotoUploadRequestDto(
 
-    @Schema(description = "Optional description of the photo", example = "Własna praca")
-    private String description;
+        Set<MultipartFile> file,
+
+        @Schema(description = "Optional description of the photo", example = "Własna praca")
+        String description
+) {
 }

@@ -1,21 +1,34 @@
 package com.sproutsync.domain.photo;
 
 import com.sproutsync.domain.group.Group;
-
-import javax.persistence.*;
-
 import com.sproutsync.domain.loginandregister.User;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter(AccessLevel.PACKAGE)
+@Setter(AccessLevel.PACKAGE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Photo {
+class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +38,8 @@ public class Photo {
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
     private Group group;
 
-    private String url;
+    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<PhotoUrl> url = new ArrayList<>();
 
     private String description;
 
@@ -44,5 +58,15 @@ public class Photo {
     @PreUpdate
     public void preUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+
+    public void addUrl(PhotoUrl photoUrl) {
+        url.add(photoUrl);
+        photoUrl.setPhoto(this);
+    }
+
+    public void removeUrl(PhotoUrl photoUrl) {
+        url.remove(photoUrl);
+        photoUrl.setPhoto(null);
     }
 }

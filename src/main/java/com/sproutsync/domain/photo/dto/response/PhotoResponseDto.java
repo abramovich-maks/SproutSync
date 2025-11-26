@@ -1,33 +1,34 @@
 package com.sproutsync.domain.photo.dto.response;
 
+import com.sproutsync.domain.group.dto.response.GroupResponseDto;
+import com.sproutsync.domain.loginandregister.dto.UserDto;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
+@Builder
 @Schema(name = "PhotoResponse", description = "Response DTO representing a photo in the gallery")
-public class PhotoResponseDto {
+public record PhotoResponseDto(
+        @Schema(description = "Photo ID")
+        Long id,
 
-    @Schema(description = "Photo ID", example = "55")
-    private Long id;
+        @Schema(description = "The group to which the menu belongs")
+        GroupResponseDto group,
 
-    @Schema(description = "ID of the group the photo belongs to", example = "3")
-    private Long groupId;
+        @Schema(description = "URL of the stored photo")
+        List<String> url,
 
-    @Schema(description = "URL of the stored photo", example = "https://example.com/example.png")
-    private String url;
+        @Schema(description = "Description of the photo")
+        String description,
 
-    @Schema(description = "Description of the photo", example = "Własna praca")
-    private String description;
+        @Schema(description = "Timestamp when the photo was uploaded")
+        LocalDateTime createdAt,
 
-    @Schema(description = "Timestamp when the photo was uploaded", example = "2025-08-15T10:30:00", type = "string", format = "date-time")
-    private LocalDateTime createdAt;
+        @Schema(description = "Timestamp when the photo metadata was last updated")
+        LocalDateTime updatedAt,
 
-    @Schema(description = "Timestamp when the photo metadata was last updated", example = "2025-08-16T09:45:00", type = "string", format = "date-time")
-    private LocalDateTime updatedAt;
-
-    @Schema(description = "ID of the user who uploaded the photo", example = "3")
-    private Long createdById;
-
+        @Schema(description = "User who created the announcement")
+        UserDto createdBy) {
 }
