@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
-import com.sproutsync.domain.loginandregister.dto.UserDto;
+import com.sproutsync.domain.loginandregister.dto.UserSecurityDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,9 +42,9 @@ class JwtAuthTokenFilter extends OncePerRequestFilter {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(secret)).build();
         DecodedJWT decodedToken = jwtVerifier.verify(token);
         String login = decodedToken.getSubject();
-        UserDto userDto = loginAndRegisterFacade.findByEmail(login);
-        Set<SimpleGrantedAuthority> authorities = userDto.roles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+        UserSecurityDto userSecurityDto = loginAndRegisterFacade.findByEmail(login);
+        Set<SimpleGrantedAuthority> authorities = userSecurityDto.roles().stream()
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(login, null,authorities);

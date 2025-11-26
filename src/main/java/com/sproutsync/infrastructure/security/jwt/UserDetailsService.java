@@ -1,7 +1,7 @@
 package com.sproutsync.infrastructure.security.jwt;
 
 import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
-import com.sproutsync.domain.loginandregister.dto.UserDto;
+import com.sproutsync.domain.loginandregister.dto.UserSecurityDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -19,8 +18,8 @@ class UserDetailsService implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws BadCredentialsException {
-        UserDto userDto = loginAndRegisterFacade.findByEmail(username);
-        return getUser(userDto);
+        UserSecurityDto userSecurityDto = loginAndRegisterFacade.findByEmail(username);
+        return getUser(userSecurityDto);
     }
 
     @Override
@@ -48,12 +47,12 @@ class UserDetailsService implements UserDetailsManager {
         return false;
     }
 
-    private User getUser(UserDto user) {
+    private User getUser(UserSecurityDto user) {
         return new User(
                 user.mail(),
                 user.password(),
                 user.roles().stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName()))
+                        .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList())
         );
     }
