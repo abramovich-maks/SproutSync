@@ -9,24 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class PhotoFacade {
 
     private final PhotoUploader photoUploader;
+    private final PhotoDeleter photoDeleter;
 
 
     @Transactional
     public PhotoResponseDto uploadPhoto(Long groupId, PhotoUploadRequestDto uploadDto) {
         return photoUploader.uploadPhoto(groupId, uploadDto);
     }
-//
-//
-//    @Transactional
-//    public void deletePhoto(Long groupId, Long photoId) {
-//        Group group = groupRepository.findById(groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
-//        Photo photo = photoRepository.findByIdAndGroupId(photoId, groupId)
-//                .orElseThrow(() -> new EntityNotFoundException("Photo with id:" + photoId + " not found in group:" + group));
-//
-//        s3Service.deleteFile(photo.getUrl());
-//        photoRepository.deleteByIdAndGroupId(photoId, groupId);
-//    }
+
+    @Transactional
+    public void deletePhoto(Long groupId, Long photoId) {
+        photoDeleter.deletePhoto(groupId, photoId);
+    }
+
+
+    @Transactional
+    public void deleteUrl(Long groupId, Long photoId, Long urlId) {
+        photoDeleter.deleteUrl(groupId, photoId, urlId);
+    }
 //
 //    public List<Photo> getAllPhotosByGroupId(Long idGroup) {
 //        Group group = groupRepository.findById(idGroup)

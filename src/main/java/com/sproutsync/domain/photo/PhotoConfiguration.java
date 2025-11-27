@@ -13,9 +13,11 @@ class PhotoConfiguration {
     PhotoFacade photoFacade(PhotoRepository photoRepository,
                             GroupFacade groupFacade,
                             LoginAndRegisterFacade loginAndRegisterFacade,
-                            S3Service s3Service
+                            S3Service s3Service,
+                            UrlRepository urlRepository
     ) {
         PhotoUploader photoUploader = new PhotoUploader(photoRepository, groupFacade, loginAndRegisterFacade, s3Service);
-        return new PhotoFacade(photoUploader);
+        PhotoDeleter photoDeleter = new PhotoDeleter(photoRepository, urlRepository, groupFacade, s3Service);
+        return new PhotoFacade(photoUploader, photoDeleter);
     }
 }
