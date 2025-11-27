@@ -1,12 +1,12 @@
-package com.sproutsync.domain.photo;
+package com.sproutsync.domain.photoalbum;
 
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
 import com.sproutsync.domain.loginandregister.User;
-import com.sproutsync.domain.photo.dto.request.PhotoUploadRequestDto;
-import com.sproutsync.domain.photo.dto.response.PhotoResponseDto;
+import com.sproutsync.domain.photoalbum.dto.request.AlbumUploadRequestDto;
+import com.sproutsync.domain.photoalbum.dto.response.AlbumResponseDto;
 import com.sproutsync.infrastructure.s3aws.S3Service;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,27 +14,27 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.List;
 
-import static com.sproutsync.domain.photo.PhotoMapper.mapFromUserToUserDto;
+import static com.sproutsync.domain.photoalbum.AlbumMapper.mapFromUserToUserDto;
 
 @AllArgsConstructor
-class PhotoUploader {
+class AlbumUploader {
 
-    private final PhotoRepository photoRepository;
+    private final AlbumRepository albumRepository;
     private final GroupFacade groupFacade;
     private final LoginAndRegisterFacade loginAndRegisterFacade;
     private final S3Service s3Service;
 
     @Transactional
-    public PhotoResponseDto uploadPhoto(Long groupId, PhotoUploadRequestDto uploadDto) {
+    public AlbumResponseDto uploadPhoto(Long groupId, AlbumUploadRequestDto uploadDto) {
         GroupResponseDto groupDto = groupFacade.getGroupById(groupId);
         User user = loginAndRegisterFacade.getUserPrincipal();
 
         Group group = groupFacade.getGroupEntity(groupDto.groupId());
 
-        Photo photo = new Photo();
-        photo.setGroup(group);
-        photo.setDescription(uploadDto.description());
-        photo.setCreatedBy(user);
+        Album album = new Album();
+        album.setGroup(group);
+        album.setDescription(uploadDto.description());
+        album.setCreatedBy(user);
 
         uploadDto.file().forEach(multipartFile -> {
             try {
@@ -42,24 +42,24 @@ class PhotoUploader {
                 String key = java.util.UUID.randomUUID() + "-" + original;
                 String url = s3Service.uploadFileAndGetUrl(multipartFile, key);
 
-                PhotoUrl photoUrl = new PhotoUrl();
-                photoUrl.setUrl(url);
-                photo.addUrl(photoUrl);
+                Photo photo = new Photo();
+                photo.setUri(url);
+                album.addPhoto(photo);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to upload file", e);
             }
         });
 
-        Photo saved = photoRepository.save(photo);
+        Album saved = albumRepository.save(album);
 
-        List<String> urlList = saved.getUrl().stream()
-                .map(PhotoUrl::getUrl)
+        List<String> photoUrls = saved.getAlbum().stream()
+                .map(Photo::getUri)
                 .toList();
 
-        return PhotoResponseDto.builder()
+        return AlbumResponseDto.builder()
                 .id(saved.getId())
                 .group(groupDto)
-                .url(urlList)
+                .photo(photoUrls)
                 .description(saved.getDescription())
                 .createdAt(saved.getCreatedAt())
                 .updatedAt(saved.getUpdatedAt())

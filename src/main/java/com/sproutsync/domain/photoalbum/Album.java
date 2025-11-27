@@ -1,4 +1,4 @@
-package com.sproutsync.domain.photo;
+package com.sproutsync.domain.photoalbum;
 
 import com.sproutsync.domain.group.Group;
 import com.sproutsync.domain.loginandregister.User;
@@ -28,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class Photo {
+class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +38,8 @@ class Photo {
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
     private Group group;
 
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<PhotoUrl> url = new ArrayList<>();
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Photo> album = new ArrayList<>();
 
     private String description;
 
@@ -60,13 +60,13 @@ class Photo {
         updatedAt = LocalDateTime.now();
     }
 
-    public void addUrl(PhotoUrl photoUrl) {
-        url.add(photoUrl);
-        photoUrl.setPhoto(this);
+    public void addPhoto(Photo photo) {
+        album.add(photo);
+        photo.setAlbum(this);
     }
 
-    public void removeUrl(PhotoUrl photoUrl) {
-        url.remove(photoUrl);
-        photoUrl.setPhoto(null);
+    public void removePhoto(Photo photo) {
+        album.remove(photo);
+        photo.setAlbum(null);
     }
 }

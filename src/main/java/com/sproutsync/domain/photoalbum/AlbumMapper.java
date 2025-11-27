@@ -1,9 +1,9 @@
-package com.sproutsync.domain.photo;
+package com.sproutsync.domain.photoalbum;
 
 import com.sproutsync.domain.loginandregister.User;
 import com.sproutsync.domain.loginandregister.dto.UserDto;
 
-public class PhotoMapper {
+class AlbumMapper {
 
     public static UserDto mapFromUserToUserDto(final User user) {
         return UserDto.builder()

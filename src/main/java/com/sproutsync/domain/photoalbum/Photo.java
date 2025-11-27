@@ -1,4 +1,4 @@
-package com.sproutsync.domain.photo;
+package com.sproutsync.domain.photoalbum;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,21 +20,16 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class PhotoUrl {
+class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String url;
+    private String uri;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "photo_id", nullable = false)
-    private Photo photo;
-
-    public PhotoUrl(String url, Photo photo) {
-        this.url = url;
-        this.photo = photo;
-    }
+    @JoinColumn(name = "album_id", nullable = false)
+    private Album album;
 }

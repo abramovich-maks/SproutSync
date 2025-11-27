@@ -1,4 +1,4 @@
-package com.sproutsync.domain.photo.dto.response;
+package com.sproutsync.domain.photoalbum.dto.response;
 
 import com.sproutsync.domain.group.dto.response.GroupResponseDto;
 import com.sproutsync.domain.loginandregister.dto.UserDto;
@@ -9,18 +9,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-@Schema(name = "PhotoResponse", description = "Response DTO representing a photo in the gallery")
-public record PhotoResponseDto(
-        @Schema(description = "Photo ID")
+@Schema(name = "AlbumResponse", description = "Response DTO representing an album in the gallery")
+public record AlbumResponseDto(
+        @Schema(description = "Album ID")
         Long id,
 
         @Schema(description = "The group to which the menu belongs")
         GroupResponseDto group,
 
-        @Schema(description = "URL of the stored photo")
-        List<String> url,
+        @Schema(description = "Photo of the stored album")
+        List<String> photo,
 
-        @Schema(description = "Description of the photo")
+        @Schema(description = "Description of the album")
         String description,
 
         @Schema(description = "Timestamp when the photo was uploaded")

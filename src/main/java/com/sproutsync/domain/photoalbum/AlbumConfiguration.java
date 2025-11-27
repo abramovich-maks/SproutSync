@@ -1,4 +1,4 @@
-package com.sproutsync.domain.photo;
+package com.sproutsync.domain.photoalbum;
 
 import com.sproutsync.domain.group.GroupFacade;
 import com.sproutsync.domain.loginandregister.LoginAndRegisterFacade;
@@ -7,17 +7,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class PhotoConfiguration {
+class AlbumConfiguration {
 
     @Bean
-    PhotoFacade photoFacade(PhotoRepository photoRepository,
+    AlbumFacade albumFacade(AlbumRepository albumRepository,
                             GroupFacade groupFacade,
                             LoginAndRegisterFacade loginAndRegisterFacade,
                             S3Service s3Service,
-                            UrlRepository urlRepository
+                            PhotoRepository photoRepository
     ) {
-        PhotoUploader photoUploader = new PhotoUploader(photoRepository, groupFacade, loginAndRegisterFacade, s3Service);
-        PhotoDeleter photoDeleter = new PhotoDeleter(photoRepository, urlRepository, groupFacade, s3Service);
-        return new PhotoFacade(photoUploader, photoDeleter);
+
+        AlbumUploader albumUploader = new AlbumUploader(albumRepository, groupFacade, loginAndRegisterFacade, s3Service);
+        AlbumDeleter albumDeleter = new AlbumDeleter(albumRepository, photoRepository, groupFacade, s3Service);
+        return new AlbumFacade(albumUploader, albumDeleter);
     }
 }
