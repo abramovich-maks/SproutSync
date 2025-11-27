@@ -39,5 +39,7 @@ public class GroupFacade {
         return groupRetriever.findGroupDtoById(groupId);
     }
 
-    // todo add method addUserToGroup
+    public Group getGroupEntity(Long groupId) {
+        return groupRetriever.getGroupEntity(groupId);
+    }
 }

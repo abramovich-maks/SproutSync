@@ -42,4 +42,9 @@ class GroupRetriever {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    public Group getGroupEntity(Long groupId) {
+        return groupRepository.findGroupById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException(groupId));
+    }
 }
