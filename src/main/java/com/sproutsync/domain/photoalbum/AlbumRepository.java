@@ -12,4 +12,6 @@ interface AlbumRepository extends JpaRepository<Album, Long> {
     Optional<Album> findByIdAndGroupId(Long id, Long groupId);
 
     void deleteByIdAndGroupId(Long id, Long groupId);
+
+    List<Album> findAllByGroupId(Long groupId);
 }
