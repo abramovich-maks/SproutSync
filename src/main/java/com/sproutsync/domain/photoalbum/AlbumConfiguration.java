@@ -19,7 +19,7 @@ class AlbumConfiguration {
 
         AlbumUploader albumUploader = new AlbumUploader(albumRepository, groupFacade, loginAndRegisterFacade, s3Service);
         AlbumDeleter albumDeleter = new AlbumDeleter(albumRepository, photoRepository, groupFacade, s3Service);
-        AlbumRetriever albumRetriever = new AlbumRetriever(albumRepository,groupFacade);
+        AlbumRetriever albumRetriever = new AlbumRetriever(albumRepository,groupFacade,photoRepository);
         return new AlbumFacade(albumUploader, albumDeleter,albumRetriever);
     }
 }
