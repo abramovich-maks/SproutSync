@@ -5,8 +5,9 @@ import com.sproutsync.domain.usercrud.dto.request.CreateUserRequestDto;
 import com.sproutsync.domain.usercrud.dto.request.UserUpdateRequestDto;
 import com.sproutsync.domain.usercrud.dto.response.UserListResponseDto;
 import com.sproutsync.domain.usercrud.dto.response.UserResponseDto;
-import com.sproutsync.domain.usercrud.dto.response.UserUpdateResponseDto;
 import lombok.AllArgsConstructor;
+
+import java.util.Map;
 
 @AllArgsConstructor
 public class UserCrudFacade {
@@ -20,7 +21,7 @@ public class UserCrudFacade {
         return userAdder.addUser(user);
     }
 
-    public UserUpdateResponseDto partiallyUpdateUser(Long userId, UserUpdateRequestDto updateDto) {
+    public Map<String, Object> partiallyUpdateUser(Long userId, UserUpdateRequestDto updateDto) {
         return userUpdater.partiallyUpdateUser(userId, updateDto);
     }
 

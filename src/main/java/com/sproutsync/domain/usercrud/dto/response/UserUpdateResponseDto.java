@@ -10,7 +10,7 @@ public record UserUpdateResponseDto(
         String username,
         String surname,
         String email,
-        Set<Long> roleIds
+        Set<String> role
 ) {}
 
 

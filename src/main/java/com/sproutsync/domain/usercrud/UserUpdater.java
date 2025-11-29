@@ -5,10 +5,11 @@ import com.sproutsync.domain.role.Role;
 import com.sproutsync.domain.role.RoleFacade;
 import com.sproutsync.domain.role.dto.RoleResponseDto;
 import com.sproutsync.domain.usercrud.dto.request.UserUpdateRequestDto;
-import com.sproutsync.domain.usercrud.dto.response.UserUpdateResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,40 +23,48 @@ class UserUpdater {
     private final RoleFacade roleFacade;
     private final PasswordEncoder passwordEncoder;
 
-
-    public UserUpdateResponseDto partiallyUpdateUser(Long id, UserUpdateRequestDto dto) {
+    public Map<String, Object> partiallyUpdateUser(Long id, UserUpdateRequestDto dto) {
+        if (dto.username() == null && dto.surname() == null && dto.email() == null && dto.password() == null && dto.roleIds() == null) {
+            throw new IllegalArgumentException("At least one field must be provided for update.");
+        }
         User user = userCrudRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
-        UserUpdateResponseDto.UserUpdateResponseDtoBuilder responseBuilder =
-                UserUpdateResponseDto.builder().id(id);
+        Map<String, Object> updatedFields = new LinkedHashMap<>();
+        updatedFields.put("id", id);
 
-        if (dto.getUsername() != null) {
-            user.setUsername(dto.getUsername());
-            responseBuilder.username(dto.getUsername());
-        }
-        if (dto.getSurname() != null) {
-            user.setSurname(dto.getSurname());
-            responseBuilder.surname(dto.getSurname());
-        }
-        if (dto.getEmail() != null) {
-            userCrudRetriever.userExists(dto.getEmail());
-            user.setEmail(dto.getEmail());
-            responseBuilder.email(dto.getEmail());
-        }
-        if (dto.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        if (dto.username() != null) {
+            user.setUsername(dto.username());
+            updatedFields.put("username", dto.username());
         }
 
-        if (dto.getRoleIds() != null) {
-            Set<RoleResponseDto> collectRoleId = dto.getRoleIds().stream()
+        if (dto.surname() != null) {
+            user.setSurname(dto.surname());
+            updatedFields.put("surname", dto.surname());
+        }
+
+        if (dto.email() != null) {
+            userCrudRetriever.userExists(dto.email());
+            user.setEmail(dto.email());
+            updatedFields.put("email", dto.email());
+        }
+
+        if (dto.password() != null) {
+            user.setPassword(passwordEncoder.encode(dto.password()));
+            updatedFields.put("passwordUpdated", true);
+        }
+
+        if (dto.roleIds() != null) {
+            Set<RoleResponseDto> roleDtos = dto.roleIds().stream()
                     .map(roleFacade::findRoleById)
                     .collect(Collectors.toSet());
-            Set<Role> collect = mapFromRoleResponseDtoToRole(collectRoleId);
-            user.setAuthorities(collect);
-            responseBuilder.roleIds(dto.getRoleIds());
+
+            Set<Role> roles = mapFromRoleResponseDtoToRole(roleDtos);
+            user.setAuthorities(roles);
+
+            updatedFields.put("roles", roles.stream().map(Role::getName).collect(Collectors.toSet()));
         }
         userCrudRepository.save(user);
-        return responseBuilder.build();
+        return updatedFields;
     }
 }
