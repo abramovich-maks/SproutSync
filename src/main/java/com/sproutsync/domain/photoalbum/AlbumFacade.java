@@ -1,9 +1,10 @@
 package com.sproutsync.domain.photoalbum;
 
 import com.sproutsync.domain.photoalbum.dto.request.AlbumUploadRequestDto;
+import com.sproutsync.domain.photoalbum.dto.response.AlbumPhotoGroupResponseDto;
 import com.sproutsync.domain.photoalbum.dto.response.AlbumResponseDto;
+import com.sproutsync.domain.photoalbum.dto.response.ListPhotosResponseDto;
 import com.sproutsync.domain.photoalbum.dto.response.PhotoAlbumGroupResponseDto;
-import com.sproutsync.domain.photoalbum.dto.response.PhotoResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public class AlbumFacade {
 
     @Transactional
     public AlbumResponseDto uploadAlbum(Long groupId, AlbumUploadRequestDto uploadDto) {
-        return albumUploader.uploadPhoto(groupId, uploadDto);
+        return albumUploader.uploadAlbum(groupId, uploadDto);
     }
 
     @Transactional
@@ -34,7 +35,11 @@ public class AlbumFacade {
         return albumRetriever.getAllAlbumsByGroupId(groupId);
     }
 
-    public PhotoResponseDto getAllPhotosByAlbum(Long groupId, Long albumId) {
+    public ListPhotosResponseDto getAllPhotosByAlbum(Long groupId, Long albumId) {
         return albumRetriever.getAllPhotosByAlbum(groupId, albumId);
+    }
+
+    public AlbumPhotoGroupResponseDto getPhotoByIdAndAlbumId(Long groupId, Long albumId, Long photoId) {
+        return albumRetriever.getPhotoByIdAndAlbumId(groupId, albumId, photoId);
     }
 }

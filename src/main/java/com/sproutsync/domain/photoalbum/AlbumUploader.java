@@ -25,7 +25,7 @@ class AlbumUploader {
     private final S3Service s3Service;
 
     @Transactional
-    public AlbumResponseDto uploadPhoto(Long groupId, AlbumUploadRequestDto uploadDto) {
+    public AlbumResponseDto uploadAlbum(Long groupId, AlbumUploadRequestDto uploadDto) {
         GroupResponseDto groupDto = groupFacade.getGroupById(groupId);
         User user = loginAndRegisterFacade.getUserPrincipal();
 
