@@ -1,4 +1,4 @@
-package com.sproutsync.userservice.config;
+package com.sproutsync.infrastructure.s3aws;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
